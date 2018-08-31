@@ -316,7 +316,7 @@ $cols2[] = $col2;
 $col2 = array();
 $col2["title"] = "User";
 $col2["name"] = "uid";
-$col2["width"] = "240";
+$col2["width"] = "220";
 $col2["sortable"] = false; 
 $col2["search"] = true; 
 $col2["editable"] = false; 
@@ -333,29 +333,33 @@ $cols2[] = $col2;
 $col2 = array();
 $col2["title"] = "Add";
 $col2["name"] = "madd";
-$col2["width"] = "70";
+$col2["width"] = "40";
 $col2["sortable"] = false; 
 $col2["search"] = false; 
 $col2["editable"] = true; 
-$col2["edittype"] = "checkbox";
-$col2["editoptions"] = array("value"=>"Yes:No");
-$col2["hidden"] = true; 
+$col2["edittype"] = "select";
+$str="Yes:Yes;No:No";
+$col2["editoptions"] = array("value"=>$str);
+$col2["searchoptions"] = array("value"=> $str); 
+$col2["formatter"] = "select";
 $col2["editrules"] = array("edithidden"=>true);
 $cols2[] = $col2;
 
 $col2 = array();
 $col2["title"] = "Edit";
 $col2["name"] = "medit";
-$col2["width"] = "70";
+$col2["width"] = "40";
 $col2["sortable"] = false; 
 $col2["search"] = false; 
 $col2["editable"] = true; 
 $col2["edittype"] = "checkbox";
-$col2["editoptions"] = array("value"=>"Yes:No");
-$col2["hidden"] = true; 
+$str="Yes:Yes;No:No";
+$col2["editoptions"] = array("value"=>$str);
+$col2["searchoptions"] = array("value"=> $str); 
+$col2["formatter"] = "select";
 $col2["editrules"] = array("edithidden"=>true);
 $cols2[] = $col2;
-
+/*
 $col2 = array();
 $col2["title"] = "Delete";
 $col2["name"] = "mdelete";
@@ -367,7 +371,7 @@ $col2["edittype"] = "checkbox";
 $col2["editoptions"] = array("value"=>"Yes:No");
 $col2["hidden"] = true; 
 $col2["editrules"] = array("edithidden"=>true);
-$cols2[] = $col2;
+$cols2[] = $col2;*/
 /*
 session_start();
 if (!empty($_POST["displayname"]))
@@ -397,7 +401,7 @@ $grid2["shrinkToFit"] = false;
 $grid2["reloadedit"] = true;
 
 $grid2["afterSaveCell"] = "function() { jQuery(this).trigger('reloadGrid'); }";
-$grid2["width"] =300;
+$grid2["width"] =380;
 $grid2["height"] =430;
 $grid2["toolbar"] ="top";
 $e2["on_update"] = array("on_update2", $fn_this, false); 

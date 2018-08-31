@@ -223,7 +223,7 @@ public static function connectDb()
   public function authenticate() {
     $conn = parent::connect();
 	
-    $sql = "SELECT * FROM " . TBL_MEMBERS . " WHERE username = :username AND (password = password(:password) or password = md5(:password)) and status not in('C')";
+    $sql = "SELECT * FROM " . TBL_MEMBERS . " WHERE username = :username AND (password = password(:password) or password = md5(:password)) and status not in('Inactive')";
 
     try {
       $st = $conn->prepare( $sql );

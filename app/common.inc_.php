@@ -201,4 +201,38 @@ $_SESSION["thisFile"]=$thisFile;
 function checkPageAccess() {
   session_start();
 }
+function activateSMTP($mail){
+define('mSMTPSERVER','smtp.gmail.com'); 
+define('mSMTPPORT', '465'); 
+define('mSMTPTLS', 'ssl');
+define('mAUTHTYPE', 'XOAUTH2');
+define('mSMTPAUTH', true);
+define('mAUTHUSEREMAIL', 'mhrelayemail@gmail.com');
+define('mAUTHCLIENTID', '372391396835-rse8i7iqem0kl9okf5qv24gh9ujl9v49.apps.googleusercontent.com');
+define('mAUTHCLIENTSECRET', 'MTPDXVg_tEx4isNiZBv65IhS');
+define('mAUTHREFRESHTOKEN', '1/g0g9HFnBMw8nzVfFTRMpsTi4tWzZaz62g2jKvpErrZA');
+
+$mail->SMTPDebug = 0;                               
+$mail->isSMTP(); 
+$mail->isHTML(true);
+$mail->SMTPAuth=mSMTPAUTH;           
+$mail->Host = mSMTPSERVER;
+$mail->SMTPSecure = mSMTPTLS;                           
+$mail->Port = mSMTPPORT; 
+$mail->AuthType = mAUTHTYPE;
+$mail->oauthUserEmail = mAUTHUSEREMAIL;
+$mail->oauthClientId = mAUTHCLIENTID;
+$mail->oauthClientSecret = mAUTHCLIENTSECRET;
+$mail->oauthRefreshToken = mAUTHREFRESHTOKEN;
+
+//---------------mchhetri---------------------------
+//pema:1/MFrsv1kYpW9UlUunuLPmyjqUs1KjrPoRg0oiJRsxOUc
+//mukti:1/NCs_kvg8bKBu0hfMhMZ816B3fSmcwn2viE2qgNpLRc4
+//mh:1/LRhyFp5AIP5PX3YOsd_nUoqv3EhJsN9iogmb_aPef9M
+
+
+//----------------------mhrelayemail@gmail.com-----------
+//mhemailrelay:1/g0g9HFnBMw8nzVfFTRMpsTi4tWzZaz62g2jKvpErrZA
+
+}
 ?>

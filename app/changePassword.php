@@ -122,21 +122,16 @@ if ( $errorMessages ) {
 }
 
 function displayThanks() {
- displayPageHeader( "Record Saved!" );
-//sendMailToResponce($_POST["staffcode"]);
+
 ?>
-<div id='main'  "style"left=9px>
+
 <?php
 session_start();
 $_SESSION["member"] = "";
    ?>
-   <p>Password successfully changed. <a href="login.php"> Login again</a></p>
-</div>
+<div class='alert alert-success' style="position:absolute;left:400px;top:200px;margin:10px;width:300px;">Password successfully changed. <a href="mainMenu.php"> Login again</a></div>
 <?php
-  //displayPageFooter();
-  
-  include 'mhvFooter.php';
-  }
+}
 ?>
 <?php
 function checkOldPassword($oldpassword,$userName)

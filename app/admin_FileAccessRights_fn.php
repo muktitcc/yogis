@@ -53,10 +53,10 @@ function on_update2($data){
 $fid= FID;
 $madd=$data["params"]["madd"];
 $medit=$data["params"]["medit"];
-$mdelete=$data["params"]["mdelete"];
+$mdelete='No';//$data["params"]["mdelete"];
 $selected_uids = $data["id"];
 $marray = explode(',', $selected_uids); 
-foreach($marray as $uid) //loop over values
+foreach($marray as $uid) 
 {
 mysql_query("update yogis.tblfileaccessrights set madd='$madd',medit='$medit',mdelete='$mdelete' where fid='$fid' and id='$uid'");
 }

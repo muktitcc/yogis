@@ -29,10 +29,9 @@ $myEmail=$tmpEmail[0];
 $userId=$row["id"];
 $username=$row["username"];
 $email=$row["emailid"];
-$staffcode=$row["staffcode"];
 $mySessionId=$userName.session_id();	
 $mySessionIdEncrypted=$this->mc->encrypt($mySessionId);
-if(self::sendEmail($myEmail,$mySessionIdEncrypted,$staffcode)=="ok"){
+if(self::sendEmail($myEmail,$mySessionIdEncrypted,$userId)=="ok"){
 $mSql_inner="insert into yogis.tbluser_resetpassword(userid,username,email,requesteddate,midentification) values('$userId','$username','$email',now(),'$mySessionIdEncrypted')";
 try{
 $stmt_inner=$pdoConn->prepare($mSql_inner);
@@ -56,7 +55,7 @@ function sendEmail($myEmail,$mySessionIdEncrypted,$staffcode){
 $pdoConn=parent::connect();
 $authCode=urlencode($mySessionIdEncrypted);
 $to=$myEmail;
-$staffName=$this->fn->_getStaffName($staffcode);
+$staffName=$this->fn->_getUserName($staffcode);
 $subject = "Password Reset";
 $message         = '
 <html>
@@ -70,8 +69,8 @@ $message         = '
 ';	
 $mail = new PHPMailerOAuth;
 activateSMTP($mail);
-$mail->setFrom("noreply@mountainhazelnuts.com", "RMT Password Reset Service");                                 
-$mail->AddReplyTo("noreply@mountainhazelnuts.com", "RMT Password Reset Service");
+$mail->setFrom("noreply@mountainhazelnuts.com", "Password Reset Service");                                 
+$mail->AddReplyTo("noreply@mountainhazelnuts.com", "Password Reset Service");
 $addresses = explode(',', $to);
 foreach ($addresses as $address) {
 $mail->AddAddress($address);
@@ -115,7 +114,6 @@ $stmt->execute();
 $row=$stmt->fetch();
 $userid=$row["userid"];
 $email=$row["email"];
-//$myStaffcode=$this->fn->_getStaffCode($userid);
 $newPassword=$this->fn->_getRandomString(8);
 if(self::sendEmailWithPassword($email,$newPassword,$userid)=="ok"){
 $mSql="update yogis.tbluser set password=password(:password) where id='$userid'";
@@ -149,7 +147,7 @@ function sendEmailWithPassword($myEmail,$myPassword,$staffcode){
 $pdoConn=parent::connect();
 $authCode=urlencode($mySessionIdEncrypted);
 $to=$myEmail;
-$staffName=$this->fn->_getStaffName($staffcode);
+$staffName=$this->fn->_getUserName($staffcode);
 $subject = "Password Reset";
 $message         = '
 <html>
