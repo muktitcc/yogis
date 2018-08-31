@@ -1,0 +1,36 @@
+.mtitle  {
+position: absolute;
+left: 1150px;   /* must be equal to parent's right padding */
+}
+
+.navbar {
+position: fixed;
+right: 0;
+left: 0;
+z-index: 1030;
+}
+.red{
+background:red;
+color:white;
+}
+.green{
+background:green;
+color:white;
+}
+.tooltip {
+outline: none; position: absolute;
+min-width: 120px; max-width: 255px;
+}
+
+.tooltip .tool-content {
+opacity: 0; visibility: hidden;
+position: absolute;
+}
+
+.tooltip:hover .tool-content {
+background: #999; border: 1px solid #555; color: #000000;
+
+/* general styling */
+position: absolute; left: 1.3em; top: 2.6em; z-index: 99;
+visibility: visible; opacity: 1;
+}

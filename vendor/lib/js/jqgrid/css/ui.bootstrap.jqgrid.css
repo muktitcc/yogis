@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Droid Sans";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Droid Sans"), local("DroidSans"), url("https://themes.googleusercontent.com/static/fonts/droidsans/v3/s-BiyweUPV0v-yRb-cjciBsxEYwM7FgeyaSgU71cLG0.woff") format("woff");
+}
+@font-face {
+    font-family: "Droid Sans";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Droid Sans Bold"), local("DroidSans-Bold"), url("https://themes.googleusercontent.com/static/fonts/droidsans/v3/EFpQQyG9GqCrobXxL-KRMQFhaRv2pGgT5Kf0An0s4MM.woff") format("woff");
+}
+/* pager */
+.ui-jqgrid input.ui-pg-input {
+    width: 35px;
+    height: 20px;
+    margin: 0px;
+    line-height: normal;
+    font-size: 13px;
+    color: black;
+}
+
+.ui-jqgrid select.ui-pg-selbox 
+{
+    width: auto;
+    height: 20px;
+    margin: 0px;
+    line-height: normal;
+    font-size: 13px;
+    padding: 0px 0px 0px 5px;
+    color: black;
+}
+
+.ui-jqgrid .ui-jqgrid-pager
+{
+	font-size: 13px;
+	height: 31px;
+}
+
+.ui-jqgrid .ui-pg-table
+{
+	height: 29px;
+	line-height: 17px;
+}
+
+.ui-jqgrid .ui-pg-button:hover
+{
+	padding: 1px;
+}
+
+.ui-pager-control .ui-state-hover
+{
+    border-color: transparent;
+    border: 0 none;
+    padding: 1px;
+}
+

@@ -1,0 +1,44 @@
+tr.focus-row 
+{ 
+background: green; 
+color: white; 
+} 
+tr.focus-row a 
+{ 
+color: white; 
+} 
+
+tr.focus-row-2 
+{ 
+background: Bisque; 
+} 
+
+tr.focus-row-3 
+{ 
+background: teal; 
+} 
+
+.focus-cell 
+{ 
+background: red; 
+color: white; 
+} 
+a {
+text-decoration: underline;
+}
+
+.ui-jqgrid tr.jqgrow td {
+    text-overflow: ellipsis;-o-text-overflow: ellipsis;
+}
+.ui-jqgrid tr.jqgrow.ui-state-highlight td {
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap; 
+    white-space: -o-pre-wrap; 
+    overflow: hidden;
+    height: auto;
+    vertical-align: middle;
+    padding-top: 2px;
+    padding-bottom: 2px
+}
