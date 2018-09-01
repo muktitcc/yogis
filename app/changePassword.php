@@ -25,7 +25,7 @@ function displayForm( $errorMessages, $missingFields, $member ) {
 
 
 <div class="buttons" style="width:20em;margin-left:200px;clear: both;">
-   <p><h3>Change password for php interface</h3></p>
+   <p><h3>Change password</h3></p>
    </div>
     <form action="changePassword.php" method="post" style="margin-bottom: 50px;">
       <div style="width: 30em;">
