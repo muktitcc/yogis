@@ -1,5 +1,5 @@
 <?php
-include(PHP_JQGRID_CLASS_PATH_NEW."/jqgrid_dist.php");
+include(PHP_JQGRID_CLASS_PATH_OLD."/jqgrid_dist.php");
 
 $fn_this=new admin_FileMaster(new common_Functions(),new jqgrid());
 
@@ -262,7 +262,11 @@ $g->set_events($e);
 $e["js_on_load_complete"] = "do_onload";
 $g->set_events($e);	
 $g->set_conditional_css($f_conditions); 
+if(UID==1){
 $g->select_command = "select *,displayname as displayname1,secondmenuid as secondmenuid1 from yogis.tblfilemaster";
+}else{
+$g->select_command = "select *,displayname as displayname1,secondmenuid as secondmenuid1 from yogis.tblfilemaster where displayname not in('New')";	
+}
 $g->table = "tblfilemaster";
 $g->set_options($grid);
 $g->set_columns($cols);

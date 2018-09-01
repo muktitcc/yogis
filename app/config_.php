@@ -5,6 +5,9 @@ define( "DB_PASSWORD", "ty1977" );
 define( "DB_NAME", "yogis" );
 define( "DB_HOST", "localhost" );
 
+define('THUMBNAIL_IMAGE_MAX_WIDTH', 150);
+define('THUMBNAIL_IMAGE_MAX_HEIGHT', 150);
+
 define( "PAGE_SIZE", 5 );
 define( "TBL_MEMBERS", "yogis.tbluser" );
 define( "TBL_ACCESS_LOG", "yogis.tblaccesslog" );
