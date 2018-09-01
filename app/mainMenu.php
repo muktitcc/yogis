@@ -11,10 +11,9 @@ header("Location:mainMenu_m.php");
 $uid=UID;
 $update='<span class="label label-success">Update</span>';
 $new='<span class="label label-important">New</span>';
-$menuPullLeft=array(9,12,13);
 displayPageHeader( "Error" );
 ?>
-<link href="asset/css/mhvMenu.css" rel="stylesheet">
+<link href="asset/css/mainMenu.css" rel="stylesheet">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 <div class="navbar-inner">
@@ -253,10 +252,6 @@ if (strtolower($e)=="mainMenu.php"){
 
 <script src="../vendor/bootstrap/js/jquery.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="asset/js/mhithelpdesk.js"></script>
-<link href="asset/css/mhithelpdesk.css" rel="stylesheet">
-<script src="asset/js/internal_mysqlReplicationInfo.js"></script>
-<link href="asset/css/internal_mysqlReplicationInfo.css" rel="stylesheet">
-<script src="asset/js/mhvMenu.js" type="text/javascript"></script>
+<script src="asset/js/mainMenu.js" type="text/javascript"></script>
 
 

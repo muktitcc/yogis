@@ -13,8 +13,8 @@ displayPageHeader("mhvMenuTest");
 <style>
 
 </style>
-<link href="asset/css/mhvMenu.css" rel="stylesheet">
-<link href="asset/css/mhvMenu_navbar.css" rel="stylesheet">
+<link href="asset/css/mainMenu.css" rel="stylesheet">
+<link href="asset/css/mainMenu_navbar.css" rel="stylesheet">
 <div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
                 <div class="navbar-header" style="width:100px">
@@ -256,13 +256,8 @@ if (strtolower($e)=="mhvmenu.php"){
 //require_once("internal_mysqlReplicationInfo.php");
 //require_once("mhithelpdesk.php");
 ?>	
-<script src="asset/js/mhvMenu_navbar.js"></script>
-
-<script src="asset/js/mhithelpdesk.js"></script>
-<link href="asset/css/mhithelpdesk.css" rel="stylesheet">
-<script src="asset/js/internal_mysqlReplicationInfo.js"></script>
-<link href="asset/css/internal_mysqlReplicationInfo.css" rel="stylesheet">
-<script src="asset/js/mhvMenu.js" type="text/javascript"></script>
+<script src="asset/js/mainMenu_navbar.js"></script>
+<script src="asset/js/mainMenu.js" type="text/javascript"></script>
 <script>
 $('.right').on('click', function(){
     $('.navbar-toggle').click() //bootstrap 3.x by Richard

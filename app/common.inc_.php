@@ -91,16 +91,6 @@ if($fn->isMobile() or $pageTitle=="mhvMenuTest"){
 
 
 
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-        wasSubmitted = true;
-        return wasSubmitted;
-      }
-      return false;
-    }    
-</script>
 <style type="text/css">
 
 iframe {
