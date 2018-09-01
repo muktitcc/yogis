@@ -223,7 +223,7 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Dance Category"; 
 $col["name"] = "dancecategory"; 
-$col["width"] = "230"; 
+$col["width"] = "205"; 
 $col["align"] = "left"; 
 $col["search"] = true; 
 $col["editable"] = true; 
@@ -319,6 +319,10 @@ $grid["multiselect"] = false;
 $grid["auto_width"] = false;
 $grid["shrinkToFit"] = false;
 $grid["reloadedit"] = true;
+$grid["detail_grid_id"] = "listOtherDetail"; 
+$grid["subgridparams"] = "studentcode"; 
+$grid["subGrid"] = true; 
+$grid["subgridurl"] = "registration_StudentRegistration_OtherDetailShow.php";
 $grid["edit_options"] = array("recreateForm" => true, "closeAfterEdit"=>true, 'width'=>'700');
 $grid["add_options"] = array("recreateForm" => true, "closeAfterEdit"=>true, 'width'=>'700');
 $grid["width"] = 1300;
@@ -650,6 +654,24 @@ else{
 $link="<img height=25 width=25 src='asset/images/nofile-thumbnail.png'>";
 }
 return $link;
+}
+
+
+function showOtherDetail($studentcode){
+$pdoConn=parent::connect();
+
+$mSql="select * from yogis.tblstudentregistration WHERE studentcode =:1"; 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":1",$studentcode);
+$stmt->execute();
+$row=$stmt->fetch();
+
+$tableotherdetail='<table id="mtable" border="1"><tr><th>Medical Condition</th><th>Address</th></tr>';
+$tableotherdetail.='<tr><td>'.$row['medicalcondition'].'</td><td>'.$row['address'].'</td></tr>';
+$tableotherdetail.='</table>';
+
+return 	$tableotherdetail;
+	
 }
 
 
