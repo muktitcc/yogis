@@ -554,7 +554,7 @@ if($data['imagelocation']){
 $ext = pathinfo(realpath($data['imagelocation']), PATHINFO_EXTENSION); 
 if($ext <> $data['requiredfiletype']) 
 {
-phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
+//phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
 unlink(realpath($data['imagelocation'])); 
 } 
 if(file_exists(APPDATA_DIR.$data['newFile']))
@@ -571,7 +571,7 @@ $needThumb="ok";
 }
 
 if (!copy(realpath($data['imagelocation']), APPDATA_DIR.$data['newFile']) or $needThumb!='ok'){	
-phpgrid_error("failed to copy");
+//phpgrid_error("failed to copy");
 }else{
 try{
 $mSql="update yogis.tblstudentregistration set ". $data['imagelocationfield']."=:1,".$data['imagefiletypefield']."=:2 where studentcode=:3"; 
@@ -581,7 +581,7 @@ $stmt->bindParam(":2",$ext);
 $stmt->bindParam(":3",$data['studentcode']);
 $stmt->execute();
 }catch(PDOException $e){
-phpgrid_error($e->getMessage());
+//phpgrid_error($e->getMessage());
 }	
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
