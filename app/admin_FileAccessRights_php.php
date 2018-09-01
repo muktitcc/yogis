@@ -233,7 +233,7 @@ $col1["editoptions"] = array("value"=>"Yes:No");
 $col1["hidden"] = true; 
 $col1["editrules"] = array("edithidden"=>true);
 $cols1[] = $col1;
-
+/*
 $col1 = array();
 $col1["title"] = "Delete";
 $col1["name"] = "mdelete";
@@ -245,7 +245,7 @@ $col1["edittype"] = "checkbox";
 $col1["editoptions"] = array("value"=>"Yes:No");
 $col1["hidden"] = true; 
 $col1["editrules"] = array("edithidden"=>true);
-$cols1[] = $col1;
+$cols1[] = $col1;*/
 
 $grid1["rowList"] = array();
 $grid1["pgbuttons"] = false;
@@ -337,7 +337,7 @@ $col2["width"] = "40";
 $col2["sortable"] = false; 
 $col2["search"] = false; 
 $col2["editable"] = true; 
-$col2["edittype"] = "select";
+$col2["edittype"] = "checkbox";
 $str="Yes:Yes;No:No";
 $col2["editoptions"] = array("value"=>$str);
 $col2["searchoptions"] = array("value"=> $str); 

@@ -149,36 +149,12 @@ $cols[] = $col;
 
 
 
-$col = array(); 
-$col["title"] = "7777"; 
-$col["name"] = "stdfile"; 
-$col["width"] = "20"; 
-$col["search"] = false; 
-$col["editable"] = false; 
-$col["on_data_display"] = array("showStdFile",$this);
-$col["show"] = array("list"=>true,"edit"=>false,"add"=>false);
-$col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
-$col["show"] = array("view"=>false);
-$col["export"] = false;
-$cols[] = $col;	
 
-$col = array(); 
-$col["title"] = ""; 
-$col["name"] = "medfile"; 
-$col["width"] = "20"; 
-$col["search"] = false; 
-$col["editable"] = false; 
-$col["on_data_display"] = array("showMedFile",$this);
-$col["show"] = array("list"=>true,"edit"=>false,"add"=>false);
-$col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
-$col["show"] = array("view"=>false);
-$col["export"] = false;
-$cols[] = $col;
 
 
 $col = array(); 
 $col["title"] = "Student Image"; 
-$col["name"] = "stdfileuplocation";  
+$col["name"] = "studentimagelocation";  
 $col["width"] = "50"; 
 $col["editable"] = true;  
 $col["edittype"] = "file"; 
@@ -190,7 +166,7 @@ $cols[] = $col;
 
 $col = array(); 
 $col["title"] = "Birth Certificate"; 
-$col["name"] = "medfileuplocation";  
+$col["name"] = "birthcertdoclocation";  
 $col["width"] = "50"; 
 $col["editable"] = true;  
 $col["edittype"] = "file"; 
@@ -224,6 +200,7 @@ $col["on_data_display"] = array("showMedFile",$this);
 $col["show"] = array("list"=>false,"edit"=>true,"add"=>false); // only show in listing & image in edit 
 $col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
 $col["export"] = false;
+$col["formoptions"] = array("rowpos"=>"13", "colpos"=>"2");
 $cols[] = $col;
 
 
@@ -237,40 +214,73 @@ $col["edittype"] = "select";
 $str = "1:Monthly;2:Six Months;3:One Year"; 
 $col["editoptions"] = array("value"=>':;'.$str);  
 $col["editrules"] = array("required"=>true);
+$col["stype"] = "select";
+$col["formatter"] = "select"; 
+$col["searchoptions"] = array("value"=>$str);
 $col["show"] = array("list"=>true, "add"=>true, "edit"=>true, "view"=>false);
 $cols[] = $col;
 
-
-$col = array();
+$col = array(); 
 $col["title"] = "Dance Category"; 
 $col["name"] = "dancecategory"; 
-$col["width"] = "100";
-$col["search"] = false;
-$col["editable"] = true;
-$col["edittype"] = "select";
-$col["editoptions"] = array('multiple'=>true);  
-$str = $g->get_dropdown_values("select categoryid k, concat(description,' - ', categoryname) v from yogis.tbldancegroup a,yogis.tbldancecategory b where a.groupid=b.groupid"); 
-$col["editoptions"] = array("value"=>$str,'multiple'=>true,"style"=>"width:100px");  
+$col["width"] = "230"; 
+$col["align"] = "left"; 
+$col["search"] = true; 
+$col["editable"] = true; 
+$col["edittype"] = "select"; 
+$str = $g->get_dropdown_values("select categoryid k, concat(description,' - ', categoryname) v from yogis.tbldancegroup a,yogis.tbldancecategory b where a.groupid=b.groupid");   
+$col["editoptions"] = array("value"=>$str,'multiple'=>true,"style"=>"width:100px"); 
 $col["editoptions"]["dataInit"] = 'function (elem) {
 setTimeout(function () {
 $(elem).multiselect({
-height: "200",
-width: "100",
+height: "280",
+width: "200",
+selectedList:null,
 checkAllText: "all",
 uncheckAllText: "no",
-noneSelectedText: "Any",
+noneSelectedText: "None",
 open: function () {
 var $menu = $(".ui-multiselect-menu:visible");
 $menu.width("auto");
+$menu.width("auto");	
 return;
 }
 });
 $(elem).multiselect().multiselectfilter();	
 }, 50);
 }'; 
-$col["show"] = array("list"=>true,"view"=>false,"add"=>true,"edit"=>true); 
-$col["formoptions"] = array("rowpos"=>"15", "colpos"=>"2");
+$col["stype"] = "select";
+$col["formatter"] = "select"; 
+$col["searchoptions"] = array("value"=>$str);
+$col["searchoptions"]["sopt"] = array("cn");
 $col["editrules"] = array("required"=>true);
+$col["formoptions"] = array("rowpos"=>"15", "colpos"=>"2");
+$cols[] = $col;
+
+$col = array(); 
+$col["title"] = ""; 
+$col["name"] = "stdfile"; 
+$col["width"] = "20"; 
+$col["search"] = false; 
+$col["editable"] = false; 
+$col["on_data_display"] = array("showStdFile",$this);
+$col["show"] = array("list"=>true,"edit"=>false,"add"=>false);
+$col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
+$col["show"] = array("view"=>false);
+$col["export"] = false;
+$cols[] = $col;	
+
+$col = array(); 
+$col["title"] = ""; 
+$col["name"] = "medfile"; 
+$col["width"] = "20"; 
+$col["search"] = false; 
+$col["editable"] = false; 
+$col["on_data_display"] = array("showMedFile",$this);
+$col["show"] = array("list"=>true,"edit"=>false,"add"=>false);
+$col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
+$col["show"] = array("view"=>false);
+$col["export"] = false;
 $cols[] = $col;
 
 $col = array();
@@ -384,8 +394,8 @@ $package=$data["params"]["package"];
 $regdatefrom=$data["params"]["regdatefrom"];
 $regdateto=$data["params"]["regdateto"];
 $dancecategory=$data["params"]["dancecategory"];
-$stdfileuplocation=$data["params"]["stdfileuplocation"];
-$medfileuplocation=$data["params"]["medfileuplocation"];
+$stdfileuplocation=$data["params"]["studentimagelocation"];
+$medfileuplocation=$data["params"]["birthcertdoclocation"];
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
 
@@ -452,6 +462,87 @@ $this->processStudentAttachmentOnInsert($mData);
 
 function on_updateStudent($data){
 $pdoConn=parent::connect();
+
+$studentcode=$data["studentcode"];
+$studentname=$data["params"]["studentname"];
+$dateofbirth=$data["params"]["dateofbirth"];
+$medicalcondition=$data["params"]["medicalcondition"];
+$mothername=$data["params"]["mothername"];
+$fathername=$data["params"]["fathername"];
+$address=$data["params"]["address"];
+$phone=$data["params"]["phone"];
+$phoneemergency=$data["params"]["phoneemergency"];
+$package=$data["params"]["package"];
+$regdatefrom=$data["params"]["regdatefrom"];
+$regdateto=$data["params"]["regdateto"];
+$dancecategory=$data["params"]["dancecategory"];
+$stdfileuplocation=$data["params"]["studentimagelocation"];
+$medfileuplocation=$data["params"]["birthcertdoclocation"];
+$updatedby=$this->fn->_getApplicationUserName(UID);
+
+
+
+$pdoConn->beginTransaction();
+$mSql="update yogis.tblstudentregistration set studentname=:studentname,dateofbirth=:dateofbirth,medicalcondition=:medicalcondition,mothername=:mothername,fathername=:fathername,address=:address,phone=:phone,phoneemergency=:phoneemergency,package=:package,regdatefrom=:regdatefrom,regdateto=:regdateto,updatedby=:updatedby,updatedon=now(),dancecategory=:dancecategory where studentcode=:studentcode";
+	
+try{
+
+$stmt=$pdoConn->prepare($mSql);
+
+$stmt->bindParam(":studentcode",$studentcode);
+$stmt->bindParam(":studentname",$studentname);
+$stmt->bindParam(":dateofbirth",$dateofbirth);
+$stmt->bindParam(":medicalcondition",$medicalcondition);
+$stmt->bindParam(":mothername",$mothername);
+$stmt->bindParam(":fathername",$fathername);
+$stmt->bindParam(":address",$address);
+$stmt->bindParam(":phone",$phone);
+$stmt->bindParam(":phoneemergency",$phoneemergency);
+$stmt->bindParam(":package",$package);
+$stmt->bindParam(":regdatefrom",$regdatefrom);
+$stmt->bindParam(":regdateto",$regdateto);
+$stmt->bindParam(":updatedby",$updatedby);
+$stmt->bindParam(":dancecategory",$dancecategory);
+$stmt->execute();
+$pdoConn->commit();	
+
+}catch(PDOException $e){
+$pdoConn->rollBack();
+phpgrid_error($e->getMessage());	
+}
+
+$mSql = "SELECT * FROM yogis.tblstudentregistration where studentcode=:1";
+
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":1",$studentcode);
+$stmt->execute();
+$row=$stmt->fetch();
+$oldStdfile = APPDATA_DIR.'studentImages/'.$studentcode.'.'.$row['studentimagefiletype'];
+$oldMedfile = APPDATA_DIR.'birthCertificateImages/'.$studentcode.'.'.$row['birthcertdocfiletype'];
+$oldStdfilelocation=$row['studentimagelocation'];
+$oldMedfilelocation=$row['birthcertdoclocation'];
+
+if($stdfileuplocation and strcmp($oldStdfilelocation,$stdfileuplocation)!=0){ 
+$extStd = pathinfo(realpath($stdfileuplocation), PATHINFO_EXTENSION); 
+$newFileStd = 'studentImages/'.$studentcode.'.'.$extStd;
+$newfileThumb = 'studentImages/thumbnail/'.$studentcode.'.'.$extStd;
+
+$mData=array("imagelocation"=>$stdfileuplocation,"newFile"=>$newFileStd,"newfileThumb"=>$newfileThumb,"studentcode"=>$studentcode,"requiredfiletype"=>"jpg","imagelocationfield"=>"studentimagelocation","imagefiletypefield"=>"studentimagefiletype");
+
+$this->processStudentAttachmentOnInsert($mData);
+}
+
+if($medfileuplocation and strcmp($oldMedfilelocation,$medfileuplocation)!=0) 
+{ 
+$extMed = pathinfo(realpath($medfileuplocation), PATHINFO_EXTENSION); 
+$newFileMed = 'birthCertificateImages/'.$studentcode.'.'.$extMed;
+$mData=array("imagelocation"=>$medfileuplocation,"newFile"=>$newFileMed,"newfileThumb"=>false,"studentcode"=>$studentcode,"requiredfiletype"=>"pdf","imagelocationfield"=>"birthcertdoclocation","imagefiletypefield"=>"birthcertdocfiletype");
+
+$this->processStudentAttachmentOnInsert($mData);
+}
+
+
+
 }
 
 
@@ -528,6 +619,36 @@ $link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
 }
 //phpgrid_error($link);
 
+return $link;
+}
+
+
+function showMedFile($data){
+$pdoConn=parent::connect();
+$id = $data["studentcode"];
+$link='';
+$fextension='';
+$filelocation ='';
+
+$mSql="select * from yogis.tblstudentregistration WHERE studentcode =:1"; 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":1",$id);
+$stmt->execute();
+$row = $stmt->fetch();
+$filelocation = APPDATA_DIR.$row['birthcertdoclocation'];
+$fextension = $row['birthcertdocfiletype'];
+if( $fextension=='doc' or $fextension=='docx'){
+$link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='_blank'><img height=25 width=25 src='asset/images/msword-thumbnail.png'></a>";
+}else if($fextension=='pdf'){
+$link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='_blank'><img height=25 width=25 src='asset/images/pdf-thumbnail.png'></a>";
+}else if($fextension=='ppt' or $fextension=='pptx' or $fextension=='ppx'){
+$link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='_blank'><img height=25 width=25 src='asset/images/ppt-thumbnail.png'></a>";
+}else if($fextension=='xls' or $fextension=='xlsx'){
+$link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='_blank'><img height=25 width=25 src='asset/images/excel-thumbnail.png'></a>";
+}
+else{
+$link="<img height=25 width=25 src='asset/images/nofile-thumbnail.png'>";
+}
 return $link;
 }
 

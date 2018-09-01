@@ -49,9 +49,9 @@ $col["edittype"] = "password";
 $col["width"] = "100";
 $col["sortable"] = false;
 $col["search"] = false; 
-$col["editable"] = false;
+$col["editable"] = true;
 $col["editoptions"] = array("autocomplete"=>"off");
-$col["editrules"] = array("required"=>true);
+//$col["editrules"] = array("required"=>true);
 $col["show"] = array("list"=>false, "add"=>true, "edit"=>false, "view"=>false);
 $cols[] = $col;	
 
@@ -157,6 +157,10 @@ $password=$data['params']['password'];
 $repassword=$data['params']['repassword'];
 $staffname=$data['params']['staffname'];
 $emailid=$data['params']['emailid'];
+
+if(strlen(repassword)==0){
+phpgrid_error("Retype password.");
+}
 
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
