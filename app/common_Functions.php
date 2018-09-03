@@ -108,6 +108,29 @@ imagedestroy($img_disp);
 return "ok";
 }
 
+function _getDancePackage($id){
+$pdoConn=parent::connect();
+
+$mSql="select * from yogis.tbldancepackage where id=:1";
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":1",$id);
+$stmt->execute();
+$row=$stmt->fetch();
+return $row['package'];
+
+}
+
+function _getDanceCategory($id){
+$pdoConn=parent::connect();
+
+$mSql="select group_concat(description,' - ', categoryname) v from yogis.tbldancegroup a,yogis.tbldancecategory b where a.groupid=b.groupid and categoryid in($id)";
+$stmt=$pdoConn->prepare($mSql);
+$stmt->execute();
+$row=$stmt->fetch();
+return $row['v'];
+
+}
+
 
 }
 ?>

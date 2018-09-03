@@ -10,9 +10,9 @@ function getRegistrationGrid($g){
 $col = array();
 $col["title"] = "Student#";
 $col["name"] = "studentcode";
-$col["width"] = "60";
+$col["width"] = "80";
 $col["sortable"] = false;
-$col["search"] = false; 
+$col["search"] = true; 
 $col["editable"] = false;
 $col["hidden"] = false;
 $cols[] = $col;	
@@ -20,14 +20,29 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "Student Name";
 $col["name"] = "studentname";
-$col["width"] = "100";
+$col["width"] = "150";
 $col["sortable"] = false;
-$col["search"] = false; 
+$col["search"] = true; 
 $col["editable"] = true;
 $col["editoptions"] = array("autocomplete"=>"off");
 $col["editrules"] = array("required"=>true);
-$col["show"] = array("list"=>true, "add"=>true, "edit"=>true, "view"=>false);
+$col["show"] = array("list"=>false, "add"=>true, "edit"=>true, "view"=>false);
 $cols[] = $col;	
+
+
+$col = array();
+$col["title"] = "Student Name";
+$col["name"] = "studentname1";
+$col["dbname"] = "studentname";
+$col["width"] = "150";
+$col["sortable"] = false;
+$col["search"] = true; 
+$col["editable"] = false;
+$col["editoptions"] = array("autocomplete"=>"off");
+$col["editrules"] = array("required"=>true);
+$col["show"] = array("list"=>true, "add"=>false, "edit"=>false, "view"=>false);
+$col["default"]="<a target='_blank' class='studentDetail' data-fancybox-type='iframe'  href='registration_StudentRegistration_ShowPopUp.php?studentcode={studentcode}' title='{studentname}'  style='text-decoration:none; white-space:none; border:1px solid gray; padding:2px; position:relative; width:25px; color:green'>{studentname}</a>";
+$cols[] = $col;
 
 $col = array();
 $col["title"] = "DoB";
@@ -98,7 +113,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "Phone#";
 $col["name"] = "phone";
-$col["width"] = "100";
+$col["width"] = "80";
 $col["sortable"] = false;
 $col["search"] = false; 
 $col["editable"] = true;
@@ -108,9 +123,9 @@ $col["show"] = array("list"=>true, "add"=>true, "edit"=>true, "view"=>false);
 $cols[] = $col;
 
 $col = array();
-$col["title"] = "Emergency Phone#";
+$col["title"] = "Emergency<br>Phone#";
 $col["name"] = "phoneemergency";
-$col["width"] = "100";
+$col["width"] = "80";
 $col["sortable"] = false;
 $col["search"] = false; 
 $col["editable"] = true;
@@ -121,9 +136,9 @@ $col["formoptions"] = array("rowpos"=>"7", "colpos"=>"2");
 $cols[] = $col;
 
 $col = array();
-$col["title"] = "Reg. Date From";
+$col["title"] = "Reg. Date<br>From";
 $col["name"] = "regdatefrom";
-$col["width"] = "100";
+$col["width"] = "80";
 $col["sortable"] = false;
 $col["search"] = false; 
 $col["editable"] = true;
@@ -136,7 +151,7 @@ $cols[] = $col;
 $col = array();
 $col["title"] = "Reg. Date To";
 $col["name"] = "regdateto";
-$col["width"] = "100";
+$col["width"] = "80";
 $col["sortable"] = false;
 $col["search"] = false; 
 $col["editable"] = true;
@@ -184,8 +199,21 @@ $col["name"] = "stdfileupload";
 $col["width"] = "50"; 
 $col["search"] = false; 
 $col["editable"] = true; 
-$col["on_data_display"] = array("showStdFile",$this);
+$col["on_data_display"] = array("showStdFileEdit",$this);
 $col["show"] = array("list"=>false,"edit"=>true,"add"=>false); // only show in listing & image in edit 
+$col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
+$col["export"] = false;
+$cols[] = $col;
+
+$col = array(); 
+$col["title"] = ""; 
+$col["name"] = "webcam"; 
+$col["width"] = "50"; 
+$col["search"] = false; 
+$col["editable"] = true; 
+$col["on_data_display"] = array("showWebCam",$this);
+$col["show"] = array("list"=>false,"edit"=>false,"add"=>true); 
+$col["editoptions"] = array("defaultValue"=>$this->showWebCam()); 
 $col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
 $col["export"] = false;
 $cols[] = $col;
@@ -197,7 +225,7 @@ $col["width"] = "50";
 $col["search"] = false; 
 $col["editable"] = true; 
 $col["on_data_display"] = array("showMedFile",$this);
-$col["show"] = array("list"=>false,"edit"=>true,"add"=>false); // only show in listing & image in edit 
+$col["show"] = array("list"=>false,"edit"=>true,"add"=>false); 
 $col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);}"; 
 $col["export"] = false;
 $col["formoptions"] = array("rowpos"=>"13", "colpos"=>"2");
@@ -254,7 +282,7 @@ $col["formatter"] = "select";
 $col["searchoptions"] = array("value"=>$str);
 $col["searchoptions"]["sopt"] = array("cn");
 $col["editrules"] = array("required"=>true);
-$col["formoptions"] = array("rowpos"=>"15", "colpos"=>"2");
+$col["formoptions"] = array("rowpos"=>"16", "colpos"=>"2");
 $cols[] = $col;
 
 $col = array(); 
@@ -270,6 +298,8 @@ $col["show"] = array("view"=>false);
 $col["export"] = false;
 $cols[] = $col;	
 
+
+
 $col = array(); 
 $col["title"] = ""; 
 $col["name"] = "medfile"; 
@@ -282,6 +312,9 @@ $col["editoptions"]["dataInit"] = "function(o){jQuery(o).parent().html(o.value);
 $col["show"] = array("view"=>false);
 $col["export"] = false;
 $cols[] = $col;
+
+
+
 
 $col = array();
 $col["title"] = "Status"; 
@@ -338,7 +371,7 @@ jQuery("#medicalcondition").parent().attr("colspan",400);
 jQuery("#address").attr("rows",2);
 jQuery("#address").attr("cols",96);
 jQuery("#address").parent().attr("colspan",400);
-
+//document.getElementById("webcam").value="kkk";
 }';
 
 $grid["edit_options"]["afterShowForm"] = 'function (form)  
@@ -375,6 +408,8 @@ $e["on_insert"] = array("on_insertStudent", $this, false);
 $e["on_update"] = array("on_updateStudent", $this, false);
 $g->set_events($e);
 
+
+
 $g->set_conditional_css($f_conditions); 
 $g->select_command = "select * from yogis.tblstudentregistration where status='Active'";
 $g->table = "yogis.tbltopmenu";
@@ -385,6 +420,7 @@ return $g->render("listStudentRegistration");
 
 function on_insertStudent($data){
 $pdoConn=parent::connect();
+
 
 $studentname=$data["params"]["studentname"];
 $dateofbirth=$data["params"]["dateofbirth"];
@@ -398,7 +434,9 @@ $package=$data["params"]["package"];
 $regdatefrom=$data["params"]["regdatefrom"];
 $regdateto=$data["params"]["regdateto"];
 $dancecategory=$data["params"]["dancecategory"];
-$stdfileuplocation=$data["params"]["studentimagelocation"];
+
+$stdfileuplocation=empty($_SESSION["WEBCAMFILE"])?$data["params"]["studentimagelocation"]:$_SESSION["WEBCAMFILE"];
+
 $medfileuplocation=$data["params"]["birthcertdoclocation"];
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
@@ -439,7 +477,7 @@ $pdoConn->commit();
 $pdoConn->rollBack();
 phpgrid_error($e->getMessage());	
 }
-
+//phpgrid_error($stdfileuplocation);
 if($stdfileuplocation) 
 { 
 $extStd = pathinfo(realpath($stdfileuplocation), PATHINFO_EXTENSION); 
@@ -461,7 +499,7 @@ $mData=array("imagelocation"=>$medfileuplocation,"newFile"=>$newFileMed,"newfile
 $this->processStudentAttachmentOnInsert($mData);
 }
 
-	
+$_SESSION["WEBCAMFILE"]="";	
 }
 
 function on_updateStudent($data){
@@ -480,7 +518,8 @@ $package=$data["params"]["package"];
 $regdatefrom=$data["params"]["regdatefrom"];
 $regdateto=$data["params"]["regdateto"];
 $dancecategory=$data["params"]["dancecategory"];
-$stdfileuplocation=$data["params"]["studentimagelocation"];
+//$stdfileuplocation=$data["params"]["studentimagelocation"];
+$stdfileuplocation=empty($_SESSION["WEBCAMFILE"])?$data["params"]["studentimagelocation"]:$_SESSION["WEBCAMFILE"];
 $medfileuplocation=$data["params"]["birthcertdoclocation"];
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
@@ -545,7 +584,7 @@ $mData=array("imagelocation"=>$medfileuplocation,"newFile"=>$newFileMed,"newfile
 $this->processStudentAttachmentOnInsert($mData);
 }
 
-
+$_SESSION["WEBCAMFILE"]="";
 
 }
 
@@ -626,6 +665,42 @@ $link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
 return $link;
 }
 
+function showStdFileEdit($data){
+$pdoConn=parent::connect();
+$id = $data["studentcode"];
+$link='';
+$fextension='';
+$filelocation ='';
+$mfile ='';
+
+$mSql="select * from yogis.tblstudentregistration WHERE studentcode =:studentcode"; 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":studentcode",$id);
+$stmt->execute();
+$row = $stmt->fetch(); 
+$mfile = $row['studentcode'];
+$fextension = $row['studentimagefiletype'];
+
+$filelocation = APPDATA_DIR .'studentImages/'.$mfile.'.'.$fextension;
+//phpgrid_error($filelocation);
+$thumbfilelocation = APPDATA_DIR .'studentImages/thumbnail/'.$mfile.'.'.$fextension;		
+if( $fextension=='jpg' or $fextension=='jpeg'){
+$link ="<a class='studentImages'  title='".$this->fn->_getStudentName($mfile)."' href=".escapeshellarg($filelocation)." target='_blank'><img height=20 width=20 src='$thumbfilelocation'></a>";
+}else {
+$link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
+}
+//phpgrid_error($link);
+
+$m="javascript:window.open('https://dev.mountainhazelnuts.com/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
+$link1 ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a><div id='capturedimage'></div>";
+return $link.$link1;
+}
+
+function showWebCam(){
+$m="javascript:window.open('https://dev.mountainhazelnuts.com/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','toolbar=0,titlebar=0,fullscreen=1,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=1300,height=650')";
+$link ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a>";
+return $link;	
+}
 
 function showMedFile($data){
 $pdoConn=parent::connect();
@@ -651,6 +726,9 @@ $link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='
 $link ="<a class='studentImages' href=".escapeshellarg($filelocation)." target='_blank'><img height=25 width=25 src='asset/images/excel-thumbnail.png'></a>";
 }
 else{
+	
+	
+	
 $link="<img height=25 width=25 src='asset/images/nofile-thumbnail.png'>";
 }
 return $link;
@@ -672,6 +750,35 @@ $tableotherdetail.='</table>';
 
 return 	$tableotherdetail;
 	
+}
+
+function showPopUp($studentcode){
+$pdoConn=parent::connect();
+
+$mSql="select * from yogis.tblstudentregistration WHERE studentcode =:1"; 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->bindParam(":1",$studentcode);
+$stmt->execute();
+$row=$stmt->fetch();
+
+$tableotherdetail='<div style="width:800px"><table id="mtable" border="1" cellspacing="0">';
+
+
+$tableotherdetail.='<tr><th>Student Code</th><td>'.$row['studentcode'].'</td><th>Student Name</th><td>'.$row['studentname'].'</td></tr>';
+$tableotherdetail.='<tr><th>DoB</th><td>'.$row['dateofbirth'].'</td><th>Age</th><td>'.abs(floor((time() - strtotime($row['dateofbirth'])) / 31556926)).'</td></tr>';
+$tableotherdetail.='<tr><th>Medical Condition</th><td colspan="3">'.$row['studentcode'].'</td></tr>';
+$tableotherdetail.='<tr><th>Mother\'s name</th><td>'.$row['mothername'].'</td><th>Father\'s Name</th><td>'.$row['fathername'].'</td></tr>';
+$tableotherdetail.='<tr><th>Address</th><td colspan="3">'.$row['address'].'</td></tr>';
+$tableotherdetail.='<tr><th>Phone#</th><td>'.$row['phone'].'</td><th>Emergency#</th><td>'.$row['phoneemergency'].'</td></tr>';
+$tableotherdetail.='<tr><th>Phone#</th><td>'.$row['phone'].'</td><th>Emergency#</th><td>'.$row['phoneemergency'].'</td></tr>';
+$tableotherdetail.='<tr><th>Reg.Date From</th><td>'.$row['regdatefrom'].'</td><th>Reg.Date To</th><td>'.$row['regdateto'].'</td></tr>';
+$tableotherdetail.='<tr><th>Package</th><td>'.$this->fn->_getDancePackage($row['package']).'</td><th>Dance Category</th><td>'.$this->fn->_getDanceCategory($row['dancecategory']).'</td></tr>';
+
+
+
+$tableotherdetail.='</table></div>';
+
+return 	$tableotherdetail;	
 }
 
 

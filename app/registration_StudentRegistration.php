@@ -17,6 +17,7 @@ displayPageHeader("Student Registration");
 
 
 <?php echo $outStudentRegistration?> 
-	 
-<script src="asset/js/<?php echo $_SESSION["thisFile"]?>.js" type="text/javascript"></script>	 
+
+<script src="asset/js/<?php echo $_SESSION["thisFile"]."_webcam"?>.js" type="text/javascript"></script>		 
+<script src="asset/js/<?php echo $_SESSION["thisFile"]?>.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="asset/css/common_grid_css.css"></link> 
