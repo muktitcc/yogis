@@ -3,7 +3,7 @@
 
 
 <link rel="stylesheet" type="text/css" media="screen" href="asset/css/registration_StudentRegistration.css"></link>
-<div id="results">Your captured image will appear here...</div>
+<div id="results">Captured image will appear here.</div>
 <div style="position:absolute:left:0px:top:100px" id="my_camera"></div>
 <script src="asset/js/webcam.js" type="text/javascript"></script>	
 <script language="JavaScript">
