@@ -231,7 +231,7 @@ $col["export"] = false;
 $col["formoptions"] = array("rowpos"=>"13", "colpos"=>"2");
 $cols[] = $col;
 
-
+/*
 $col = array();
 $col["title"] = "Package"; 
 $col["name"] = "package"; 
@@ -241,6 +241,23 @@ $col["editable"] = true;
 $col["edittype"] = "select";
 $str = "1:Monthly;2:Six Months;3:One Year"; 
 $col["editoptions"] = array("value"=>':;'.$str);  
+$col["editrules"] = array("required"=>true);
+$col["stype"] = "select";
+$col["formatter"] = "select"; 
+$col["searchoptions"] = array("value"=>$str);
+$col["show"] = array("list"=>true, "add"=>true, "edit"=>true, "view"=>false);
+$cols[] = $col;*/
+
+$col = array(); 
+$col["title"] = "Package"; 
+$col["name"] = "package"; 
+$col["width"] = "100"; 
+$col["align"] = "left"; 
+$col["search"] = true; 
+$col["editable"] = true; 
+$col["edittype"] = "select"; 
+$str = $g->get_dropdown_values("select a.id k, concat(a.id,' - ',package,'- ',description,'- Rs. ',fee) v from yogis.tblfeestructure a,yogis.tbldancepackage b where a.packageid=b.id");   
+$col["editoptions"] = array("value"=>':;'.$str,"style"=>"width:150px"); 
 $col["editrules"] = array("required"=>true);
 $col["stype"] = "select";
 $col["formatter"] = "select"; 
@@ -477,7 +494,7 @@ $pdoConn->commit();
 $pdoConn->rollBack();
 phpgrid_error($e->getMessage());	
 }
-//phpgrid_error($stdfileuplocation);
+
 if($stdfileuplocation) 
 { 
 $extStd = pathinfo(realpath($stdfileuplocation), PATHINFO_EXTENSION); 
@@ -525,7 +542,7 @@ $stdfileuplocation=empty($_SESSION["WEBCAMFILE"])?$data["params"]["studentimagel
 $medfileuplocation=$data["params"]["birthcertdoclocation"];
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
-phpgrid_error($tempWebCamFilePath);
+//phpgrid_error($tempWebCamFilePath);
 
 
 $pdoConn->beginTransaction();
@@ -694,13 +711,13 @@ $link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
 }
 //phpgrid_error($link);
 
-$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/mhweb-prod/rmt/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
+$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app//registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
 $link1 ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a><div id='capturedimage'></div>";
 return $link.$link1;
 }
 
 function showWebCam(){
-$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/mhweb-prod/rmt/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','toolbar=0,titlebar=0,fullscreen=1,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=1300,height=650')";
+$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','toolbar=0,titlebar=0,fullscreen=1,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=1300,height=650')";
 $link ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a>";
 return $link;	
 }
