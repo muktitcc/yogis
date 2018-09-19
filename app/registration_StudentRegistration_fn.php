@@ -709,9 +709,9 @@ $link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
 }
 //phpgrid_error($link);
 
-//$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
+$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
 
-$m="javascript:window.open('https://dev.mountainhazelnuts.com/yogis/app//registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
+//$m="javascript:window.open('https://dev.mountainhazelnuts.com/yogis/app//registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
 
 $link1 ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a><div id='capturedimage'></div>";
 return $link.$link1;
