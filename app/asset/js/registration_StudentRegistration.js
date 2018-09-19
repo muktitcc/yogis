@@ -49,7 +49,7 @@ function take_snapshot() {
 Webcam.snap( function(data_uri) {
 document.getElementById('results').innerHTML = '<h2>Processing:</h2>';
 Webcam.upload(data_uri, 'registration_StudentRegistration_SaveImageFromWebCam.php', function(code, text) {
-document.cookie="tempWebCamFilePath="+text;
+alert(text);
 document.getElementById('results').innerHTML ='Captured Image:<br>' + '<img src="'+text+'" width="450" height="350"/>';
 } );	
 } );

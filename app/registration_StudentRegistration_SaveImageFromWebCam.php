@@ -5,7 +5,8 @@ session_start();
 }
 $filename =  time() . '.jpg';
 $filepath = TEMP_DIR.'/';
-$_SESSION["WEBCAMFILE"]=$filepath.$filename;
+
 move_uploaded_file($_FILES['webcam']['tmp_name'], $filepath.$filename);
+$_SESSION["WEBCAMFILE"]=$filepath.$filename;
 echo $filepath.$filename;
 ?>
