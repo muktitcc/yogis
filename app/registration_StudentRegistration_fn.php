@@ -709,7 +709,7 @@ $link="<img height=20 width=20 src='asset/images/employeeblankimage.png'>";
 }
 //phpgrid_error($link);
 
-$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
+$m="javascript:window.open('https://202.144.141.230:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
 
 //$m="javascript:window.open('https://dev.mountainhazelnuts.com/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','width=1300,height=650')";
 
@@ -718,7 +718,7 @@ return $link.$link1;
 }
 
 function showWebCam(){
-$m="javascript:window.open('https://rmt.mountainhazelnuts.com:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','toolbar=0,titlebar=0,fullscreen=1,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=1300,height=650')";
+$m="javascript:window.open('https://202.144.141.230:8088/yogis/app/registration_StudentRegistration_ShowWebCamPopUp.php','newwind','toolbar=0,titlebar=0,fullscreen=1,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=1300,height=650')";
 $link ="<a  href=".$m."><img height=20 width=20 src='asset/images/webcam.png'></a>";
 return $link;	
 }
