@@ -590,6 +590,8 @@ $newfileThumb = 'studentImages/thumbnail/'.$studentcode.'.'.$extStd;
 
 $mData=array("imagelocation"=>$stdfileuplocation,"newFile"=>$newFileStd,"newfileThumb"=>$newfileThumb,"studentcode"=>$studentcode,"requiredfiletype"=>"jpg","imagelocationfield"=>"studentimagelocation","imagefiletypefield"=>"studentimagefiletype");
 
+//phpgrid_error(print_r($mData));
+
 $this->processStudentAttachmentOnInsert($mData);
 }
 
@@ -632,7 +634,7 @@ $needThumb="ok";
 }
 
 if (!copy(realpath($data['imagelocation']), APPDATA_DIR.$data['newFile']) or $needThumb!='ok'){	
-//phpgrid_error("failed to copy");
+phpgrid_error("File type should be jpg");
 }else{
 try{
 $mSql="update yogis.tblstudentregistration set ". $data['imagelocationfield']."=:1,".$data['imagefiletypefield']."=:2 where studentcode=:3"; 
