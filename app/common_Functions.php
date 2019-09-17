@@ -6,6 +6,13 @@ function __construct(){
     
 }
 
+
+function _myConn(){
+	$conn = "";
+	$conn= parent::connect();
+	return $conn;
+}
+
 function _getApplicationUserName($id)
 {
 $pdoConn=parent::connect();	
