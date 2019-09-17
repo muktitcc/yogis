@@ -4,7 +4,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once( "config_.php" );
 require_once( "config.php" );
-require_once( "configPDO.php" );
 require_once( "Member.class.php" );
 require_once( "DataObject.class.php" );
 require_once( "registrationSettings.class.php" );
