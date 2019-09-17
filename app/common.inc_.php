@@ -2,9 +2,13 @@
 error_reporting(1);
 require_once( "config_.php" );
 require_once( "config.php" );
+require_once( "configPDO.php" );
 require_once( "Member.class.php" );
 require_once( "DataObject.class.php" );
+require_once( "registrationSettings.class.php" );
+require_once('imageReport.class.php');
 require_once( "LogEntry.class.php" );
+require_once( "mhFunctions.php" );
 require_once("MCrypt.php");
 require_once( "common.inc_.php" );
 require_once("common_Functions.php");
@@ -12,7 +16,14 @@ require_once ("../vendor/PHPMailer/PHPMailerAutoload.php");
 require_once ("../vendor/PHPMailer/vendor/autoload.php");
 require_once ("../vendor/mike42/escpos-php/autoload.php");
 require_once "../vendor/libs/Mobile_Detect.php";
+require_once 'adminHr_GoogleContacts_fn.php';
+require_once 'adminHr_GoogleServiceAuthApplication_Main.php';
+require_once '../vendor/googlecontactmhapi/vendor/autoload.php';
+require_once '../vendor/googlecontactnonmhapi/vendor/autoload.php';
+
 date_default_timezone_set('Asia/Thimphu');
+
+$mons = array(1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr", 5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Aug", 9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec");
 function displayPageHeader( $pageTitle, $membersArea = false ) {
 $fn=new Mobile_Detect;
 ?>
@@ -22,11 +33,11 @@ $fn=new Mobile_Detect;
   <head>
 
 <meta charset="utf-8">
-<title>yogis</title>
+<title>MH::Bhutan</title>
  <meta name="viewport" content="width=device-width , initial-scale=1" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" type="image/png" href="asset/images/yogis.png" />
+<link rel="shortcut icon" type="image/png" href="asset/images/hazeyicon.png" />
  
 <link rel="stylesheet" type="text/css" media="screen" href="../vendor/libnew/js/themes/redmond/jquery-ui.custom.css"></link>     
 <link rel="stylesheet" type="text/css" media="screen" href="../vendor/libnew/js/jqgrid/css/ui.jqgrid.css"></link>  
@@ -77,7 +88,20 @@ if($fn->isMobile() or $pageTitle=="mhvMenuTest"){
 
 
   
-
+<script>
+  $(function() {
+    $( "#dateofarrival" ).datepicker({ dateFormat: "yy/mm/dd" });
+	$( "#dateoftravel" ).datepicker({ dateFormat: "yy/mm/dd" });
+	$( "#vehiclebookedfrom" ).datepicker({ dateFormat: "yy/mm/dd" });
+	$( "#vehiclebookedtill" ).datepicker({ dateFormat: "yy/mm/dd" });
+	$( "#nextScriptRunDate" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#expectedtrainingdate" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#dateoftravelling" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#fromdate" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( "#todate" ).datepicker({ dateFormat: "yy-mm-dd" });
+	$( ".myCommonDateFormat" ).datepicker({ dateFormat: "yy-mm-dd" });
+  })
+</script>
 <style type="text/css">
       th { text-align: left; background-color: #A3C2FF; }
       th, td { padding: 0.4em; }
@@ -88,9 +112,57 @@ if($fn->isMobile() or $pageTitle=="mhvMenuTest"){
 </style>
 	
 
+<script type="text/javascript">
+public function ErrMsg(msg) {
+  
+   alert(msg);
+
+  }
+  
+  
+  public function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+</script>
+<script language="javascript" type="text/javascript">
+function UpdateButton(bool,processor_details)
+{
+
+var bDisable;
+if (bool == 'E') // change the condition if required.
+{
+ bDisable = true;
+ }
+else
+{
+ bDisable = false;
+ }
+ 
+
+
+document.getElementById ("processor_details").disabled = bDisable;
+
+
+}
+</script>
 
 
 
+<script type="text/javascript">
+  var wasSubmitted = false;    
+    function checkBeforeSubmit(){
+      if(!wasSubmitted) {
+        wasSubmitted = true;
+        return wasSubmitted;
+      }
+      return false;
+    }    
+</script>
 <style type="text/css">
 
 iframe {
@@ -130,11 +202,16 @@ function setSelected( DataObject $obj, $fieldName, $fieldValue ) {
 }
 
 function checkLogin() {
+$fn=new common_Functions();
+
+$pdoConn=$fn->_myConn();
+
 $allowaccess=array();
 $allowAdd=false;
 $allowEdit=false;
 $allowDelete=false;
 $thisFile="";
+$mUID="";
 
   if(!isset($_SESSION))
   {
@@ -159,27 +236,40 @@ $thisFile="";
 	$pageUrl=basename( $_SERVER["PHP_SELF"] );
 	$thisFile=basename($_SERVER["PHP_SELF"], ".php");
 	$msql="SELECT * FROM tblfilemaster where filename='$pageUrl'";
-	$r=mysql_query($msql);
-		while ($rowy = mysql_fetch_array($r)) {
-		$fid=$rowy['fileid'];
-	}	
+    $stmt=$pdoConn->prepare($msql);
+    $stmt->execute();
+    $rowy =$stmt->fetch();
+	$fid=$rowy['fileid'];
 
-$uid=$_SESSION["member"]->getValue( "id" );
-$sql = "SELECT uid,madd,medit,mdelete FROM yogis.tblfileaccessrights WHERE uid='$uid' and fid='$fid' and access='Yes'"; 
-$result = mysql_query($sql);
-while(($row =  mysql_fetch_array($result))) {
-    $allowaccess[] = $row['uid'];
-	$allowAdd=($row["madd"]=='Yes'?true:false);
-	$allowEdit=($row["medit"]=='Yes'?true:false);
-	$allowDelete=($row["mdelete"]=='Yes'?true:false);
+
+    $uid=$_SESSION["member"]->getValue( "id" );
+    $sql = "SELECT uid,madd,medit,mdelete FROM tblfileaccessrights WHERE uid='$uid' and fid='$fid' and access='Yes'"; 
+    $stmt=$pdoConn->prepare($sql);
+    $stmt->execute();
+  
+    $row = $stmt->fetch();
+    $mUID=$row['uid'];
+    $allowaccess[] =$mUID ;
+    $allowAdd=($row["madd"]=='Yes'?true:false);
+    $allowEdit=($row["medit"]=='Yes'?true:false);
+    $allowDelete=($row["mdelete"]=='Yes'?true:false);
 	
+
+
+$defaltAccess=array(1771,1772);
+if(in_array($fid,$defaltAccess)){
+$allowaccess[] = $uid;	
 }
+
+
 $_SESSION['allowaccess']="";
 $_SESSION["add"]="";
 $_SESSION["edit"]="";
 $_SESSION["del"]="";
 $_SESSION["thisFile"]="";
+if(session_status()==PHP_SESSION_NONE){
 session_start();
+}
 $_SESSION['allowaccess'] = serialize($allowaccess);
 $_SESSION['add']=$allowAdd;
 $_SESSION['edit']=$allowEdit;
@@ -191,6 +281,7 @@ $_SESSION["thisFile"]=$thisFile;
 function checkPageAccess() {
   session_start();
 }
+
 function activateSMTP($mail){
 define('mSMTPSERVER','smtp.gmail.com'); 
 define('mSMTPPORT', '465'); 
@@ -225,4 +316,7 @@ $mail->oauthRefreshToken = mAUTHREFRESHTOKEN;
 //mhemailrelay:1/g0g9HFnBMw8nzVfFTRMpsTi4tWzZaz62g2jKvpErrZA
 
 }
+
+
+
 ?>
