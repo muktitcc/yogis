@@ -1,7 +1,7 @@
 <?php
 class admin_MenuStructure extends DataObject{
 	
-public function __construct($f,$g){
+public function __construct($f,$g=NULL){
 $this->fn=$f;
 $this->g=$g;
 }
