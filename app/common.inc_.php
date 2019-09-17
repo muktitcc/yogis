@@ -16,10 +16,6 @@ require_once ("../vendor/PHPMailer/PHPMailerAutoload.php");
 require_once ("../vendor/PHPMailer/vendor/autoload.php");
 require_once ("../vendor/mike42/escpos-php/autoload.php");
 require_once "../vendor/libs/Mobile_Detect.php";
-require_once 'adminHr_GoogleContacts_fn.php';
-require_once 'adminHr_GoogleServiceAuthApplication_Main.php';
-require_once '../vendor/googlecontactmhapi/vendor/autoload.php';
-require_once '../vendor/googlecontactnonmhapi/vendor/autoload.php';
 
 date_default_timezone_set('Asia/Thimphu');
 
