@@ -1,6 +1,12 @@
 <?php
 require_once( "common.inc_.php" );
-//$conn = mysql_connect(DB_HOST, DB_USERNAME,DB_PASSWORD) or die ("Error connecting to database");
-//mysql_select_db(DB_NAME,$conn);
+require_once( "common.inc_.php" );
+$GLOBALS['db_conf']=array(
+"type"=>"mysqli",
+"server"=>DB_HOST,
+"user"=>DB_USERNAME,
+"password"=>DB_PASSWORD,
+"database"=>DB_NAME
+)
 
 ?>
