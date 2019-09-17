@@ -6,7 +6,7 @@ require_once("userAuthentication.php");
 require_once("mainMenu_fn.php");
 $fn=new common_Functions();
 $mb=new Mobile_Detect;
-$fn_this=new mhvMenu(new common_Functions($fn));
+$fn_this=new mainMenu(new common_Functions($fn));
 
 $pdoConn=$fn->_myConn();
 
