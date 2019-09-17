@@ -241,7 +241,7 @@ default:
 
 <?php
 $e=$_GET["file"];
-if (strtolower($e)=="mhvmenu.php"){
+if (strtolower($e)=="mainMenu.php"){
 
 }else{
 ?>
@@ -260,8 +260,7 @@ if (strtolower($e)=="mhvmenu.php"){
 
 <?php
 
-require_once("internal_mysqlReplicationInfo.php");
-require_once("mhithelpdesk.php");
+
 ?>	
 
 <script src="../vendor/bootstrap/js/jquery.js"></script>
