@@ -1,18 +1,15 @@
 <?php
 require_once "DataObject.class.php";
 class common_Functions extends DataObject{
-
 function __construct(){
     
 }
-
 
 function _myConn(){
 	$conn = "";
 	$conn= parent::connect();
 	return $conn;
 }
-
 function _getApplicationUserName($id)
 {
 $pdoConn=parent::connect();	

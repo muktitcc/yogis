@@ -1,9 +1,9 @@
 <?php
 include(PHP_JQGRID_CLASS_PATH_NEW."/jqgrid_dist.php");
 
-$fn_this=new admin_FileAccessRights(new common_Functions(),new jqgrid());
+$fn_this=new admin_FileAccessRights(new common_Functions(),new jqgrid($db_conf));
 
-$g = new jqgrid(); 
+$g = new jqgrid($db_conf); 
 
 $col = array();
 $col["title"] = "id";
@@ -173,7 +173,7 @@ $out_list = $g->render("list");
 
 //Select Staff
 
-$g1 = new jqgrid(); 
+$g1 = new jqgrid($db_conf); 
 
 $col1 = array();
 $col1["title"] = "id";
@@ -301,7 +301,7 @@ $out_list1 = $g1->render("list1");
 
 //assigned users
 
-$g2 = new jqgrid(); 
+$g2 = new jqgrid($db_conf); 
 
 $col2 = array();
 $col2["title"] = "id";

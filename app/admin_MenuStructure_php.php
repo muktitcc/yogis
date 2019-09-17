@@ -1,9 +1,9 @@
 <?php
 include(PHP_JQGRID_CLASS_PATH_NEW."/jqgrid_dist.php");
 
-$fn_this=new admin_MenuStructure(new common_Functions(),new jqgrid());
+$fn_this=new admin_MenuStructure(new common_Functions(),new jqgrid($db_conf));
 
-$g = new jqgrid(); 
+$g = new jqgrid($db_conf); 
 
 $col = array();
 $col["title"] = "id";
@@ -98,7 +98,7 @@ $out = $g->render("list");
 $grid_id = "list"; 
 
 //second level menu
-$g1= new jqgrid();
+$g1= new jqgrid($db_conf);
 
 $col1 = array();
 $col1["title"] = "id";

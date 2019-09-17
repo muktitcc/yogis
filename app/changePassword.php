@@ -11,6 +11,10 @@ if ( isset( $_POST["action"] ) and $_POST["action"] == "changePassword" ) {
 }
 
 function displayForm( $errorMessages, $missingFields, $member ) {
+    
+    $fn=new common_Functions();
+    $pdoConn=$fn->_myConn();
+    
   displayPageHeader( "Register" );
 
   if ( $errorMessages ) {
@@ -25,15 +29,16 @@ function displayForm( $errorMessages, $missingFields, $member ) {
 
 
 <div class="buttons" style="width:20em;margin-left:200px;clear: both;">
-   <p><h3>Change password</h3></p>
+   <p><h3>Change password for php interface</h3></p>
    </div>
     <form action="changePassword.php" method="post" style="margin-bottom: 50px;">
       <div style="width: 30em;">
 	<?php  
 	  $userid=$_SESSION["member"]->getValue("id");
 $sql = "SELECT * FROM tbluser  where id='$userid'";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
+$stmt=$pdoConn->prepare($sql);
+$stmt->execute();
+$row = $stmt->fetch();
 	  ?>
         <input type="hidden" name="action" value="changePassword" />
 <input type="hidden" name="id" id="id" value="<?php echo $userid ?>" />
@@ -122,23 +127,35 @@ if ( $errorMessages ) {
 }
 
 function displayThanks() {
-
+ displayPageHeader( "Record Saved!" );
+//sendMailToResponce($_POST["staffcode"]);
 ?>
-
+<div id='main'  "style"left=9px>
 <?php
 session_start();
 $_SESSION["member"] = "";
    ?>
-<div class='alert alert-success' style="position:absolute;left:400px;top:200px;margin:10px;width:300px;">Password successfully changed. <a href="mainMenu.php"> Login again</a></div>
+   <p>Password successfully changed. <a href="login.php"> Login again</a></p>
+</div>
 <?php
-}
+  //displayPageFooter();
+  
+  include 'mhvFooter.php';
+  }
 ?>
 <?php
 function checkOldPassword($oldpassword,$userName)
 {
-$sql = "SELECT * FROM yogis.tbluser where (password=password('$oldpassword') or password=md5('$oldpassword')) and username='$userName'";
-$result = mysql_query($sql);
-$row = mysql_fetch_array($result);
+$fn=new common_Functions();
+$pdoConn=$fn->_myConn();    
+
+
+$sql = "SELECT * FROM tbluser where (password=password('$oldpassword') or password=md5('$oldpassword')) and username='$userName'";
+
+
+$stmt=$pdoConn->prepare($sql);
+$stmt->execute();
+$row = $stmt->fetch();
 if($row==TRUE)
 {
 return 1;

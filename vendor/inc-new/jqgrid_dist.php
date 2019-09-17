@@ -75,7 +75,6 @@ class jqgrid
 		$this->error_msg = "Some issues occured in this operation, Contact technical support for help";
 		
 		// set utf8 encoding
-		@mysql_query("SET NAMES 'utf8'");
 
 		### P ###
 		// use adodb layer to support non-mysql dbs
@@ -95,7 +94,9 @@ class jqgrid
 				$this->con->Execute("SET NAMES 'utf8'");
 		
 			$this->db_driver = $db_conf["type"];
-		}
+		}else{
+            @mysql_query("SET NAMES 'utf8'");
+        }
 		
 		$grid["datatype"] = "json";
 		$grid["rowNum"] = 20;
@@ -3358,6 +3359,9 @@ class jqgrid
 					case($grid_id=="listCgAttendance"):
 					$mCaption="Verify";
 					break;
+					case ($grid_id=="listFarmerAssignmentCall"):
+					$mCaption="Assign";
+					break;
 					default:
 					$mCaption="Bulk Edit";
 					break;
@@ -3570,7 +3574,7 @@ class jqgrid
 							if (!jQuery.browser.msie && !jQuery("link[href$='ui.bootstrap.jqgrid.css']").length)
 								jQuery(el).css('width',parseInt(jQuery(el).css('width'))-30);
 							else 
-								jQuery(el).css('width','75%');
+								jQuery(el).css('width','150px');
 																							
 							jQuery(el).after(' <button>Calendar</button>').next().button({icons:{primary: 'ui-icon-calendar'}, text:false}).css({'font-size':'69%', 'margin-left':'2px'}).click(function(e){jQuery(el).datetimepicker('show');return false;});
 						}

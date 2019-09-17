@@ -5,7 +5,7 @@ session_start();
 $_SESSION["member"] = "";
 displayPageHeader( "Logged out", true );
 error_reporting(0);
-include(PHP_JQGRID_CLASS_PATH_OLD."/jqgrid_dist.php");
+include(PHP_JQGRID_CLASS_PATH_NEW."/jqgrid_dist.php");
 ?>
 <?php
 logOut();

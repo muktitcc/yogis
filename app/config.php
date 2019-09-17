@@ -1,6 +1,5 @@
 <?php
 require_once( "common.inc_.php" );
-require_once( "common.inc_.php" );
 $GLOBALS['db_conf']=array(
 "type"=>"mysqli",
 "server"=>DB_HOST,

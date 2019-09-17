@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(1);
 require_once( "config_.php" );
 require_once( "config.php" );
 require_once( "Member.class.php" );
@@ -14,10 +12,7 @@ require_once ("../vendor/PHPMailer/PHPMailerAutoload.php");
 require_once ("../vendor/PHPMailer/vendor/autoload.php");
 require_once ("../vendor/mike42/escpos-php/autoload.php");
 require_once "../vendor/libs/Mobile_Detect.php";
-
 date_default_timezone_set('Asia/Thimphu');
-
-$mons = array(1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr", 5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Aug", 9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec");
 function displayPageHeader( $pageTitle, $membersArea = false ) {
 $fn=new Mobile_Detect;
 ?>
@@ -27,11 +22,11 @@ $fn=new Mobile_Detect;
   <head>
 
 <meta charset="utf-8">
-<title>MH::Bhutan</title>
+<title>yogis</title>
  <meta name="viewport" content="width=device-width , initial-scale=1" />
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="shortcut icon" type="image/png" href="asset/images/hazeyicon.png" />
+<link rel="shortcut icon" type="image/png" href="asset/images/yogis.png" />
  
 <link rel="stylesheet" type="text/css" media="screen" href="../vendor/libnew/js/themes/redmond/jquery-ui.custom.css"></link>     
 <link rel="stylesheet" type="text/css" media="screen" href="../vendor/libnew/js/jqgrid/css/ui.jqgrid.css"></link>  
@@ -82,20 +77,7 @@ if($fn->isMobile() or $pageTitle=="mhvMenuTest"){
 
 
   
-<script>
-  $(function() {
-    $( "#dateofarrival" ).datepicker({ dateFormat: "yy/mm/dd" });
-	$( "#dateoftravel" ).datepicker({ dateFormat: "yy/mm/dd" });
-	$( "#vehiclebookedfrom" ).datepicker({ dateFormat: "yy/mm/dd" });
-	$( "#vehiclebookedtill" ).datepicker({ dateFormat: "yy/mm/dd" });
-	$( "#nextScriptRunDate" ).datepicker({ dateFormat: "yy-mm-dd" });
-	$( "#expectedtrainingdate" ).datepicker({ dateFormat: "yy-mm-dd" });
-	$( "#dateoftravelling" ).datepicker({ dateFormat: "yy-mm-dd" });
-	$( "#fromdate" ).datepicker({ dateFormat: "yy-mm-dd" });
-	$( "#todate" ).datepicker({ dateFormat: "yy-mm-dd" });
-	$( ".myCommonDateFormat" ).datepicker({ dateFormat: "yy-mm-dd" });
-  })
-</script>
+
 <style type="text/css">
       th { text-align: left; background-color: #A3C2FF; }
       th, td { padding: 0.4em; }
@@ -106,57 +88,9 @@ if($fn->isMobile() or $pageTitle=="mhvMenuTest"){
 </style>
 	
 
-<script type="text/javascript">
-public function ErrMsg(msg) {
-  
-   alert(msg);
-
-  }
-  
-  
-  public function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
-</script>
-<script language="javascript" type="text/javascript">
-function UpdateButton(bool,processor_details)
-{
-
-var bDisable;
-if (bool == 'E') // change the condition if required.
-{
- bDisable = true;
- }
-else
-{
- bDisable = false;
- }
- 
-
-
-document.getElementById ("processor_details").disabled = bDisable;
-
-
-}
-</script>
 
 
 
-<script type="text/javascript">
-  var wasSubmitted = false;    
-    function checkBeforeSubmit(){
-      if(!wasSubmitted) {
-        wasSubmitted = true;
-        return wasSubmitted;
-      }
-      return false;
-    }    
-</script>
 <style type="text/css">
 
 iframe {
@@ -275,7 +209,6 @@ $_SESSION["thisFile"]=$thisFile;
 function checkPageAccess() {
   session_start();
 }
-
 function activateSMTP($mail){
 define('mSMTPSERVER','smtp.gmail.com'); 
 define('mSMTPPORT', '465'); 
@@ -310,7 +243,4 @@ $mail->oauthRefreshToken = mAUTHREFRESHTOKEN;
 //mhemailrelay:1/g0g9HFnBMw8nzVfFTRMpsTi4tWzZaz62g2jKvpErrZA
 
 }
-
-
-
 ?>

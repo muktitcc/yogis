@@ -55,13 +55,7 @@ class LogEntry extends DataObject {
 	$rowy = $stmt->fetch();
 	$fid=$rowy['fileid'];
 
-	$mSql="insert into tblfileaccessrights(uid,fid,access)values('1','$fid','Yes');
-    insert into tblfileaccessrights(uid,fid,access)values('3','$fid','Yes');
-    insert into tblfileaccessrights(uid,fid,access)values('4','$fid','Yes');
-    insert into tblfileaccessrights(uid,fid,access)values('5','$fid','Yes');
-    insert into tblfileaccessrights(uid,fid,access)values('78','$fid','Yes');
-    insert into tblfileaccessrights(uid,fid,access)values('158','$fid','Yes');
-    ";
+	$mSql="insert into tblfileaccessrights(uid,fid,access)values('1','$fid','Yes')";
     $stmt=$pdoConn->prepare($mSql);
     $stmt->execute();
     
