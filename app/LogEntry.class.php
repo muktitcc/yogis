@@ -32,31 +32,51 @@ class LogEntry extends DataObject {
   }
 
   public function record($pageUrl,$tille) {
+    $pdoConn=parent::connect();
+    
 	$fcnt=0;
 	$mdate=date('Y-m-d H:i:s');
     $conn = parent::connect();
 	
-	$msql="SELECT count(*) cnt  FROM yogis.tblfilemaster where filename='$pageUrl'";
-	$r=mysql_query($msql);
-	while ($rowy = mysql_fetch_array($r)) {
+	$msql="SELECT count(*) cnt  FROM tblfilemaster where filename='$pageUrl'";
+    $stmt=$pdoConn->prepare($msql);
+    $stmt->execute();
+ 	$rowy = $stmt->fetch();
 	$fcnt=$rowy['cnt'];
-	} 
+	 
 	if($fcnt==0){
-	mysql_query("insert into yogis.tblfilemaster(filename,displayname)values('$pageUrl','New')");
-	
-	$msql="SELECT *   FROM yogis.tblfilemaster where filename='$pageUrl'";
-	$r=mysql_query($msql);
-	while ($rowy = mysql_fetch_array($r)) {
+	$mSql="insert into tblfilemaster(filename,displayname)values('$pageUrl','New')";
+	$stmt=$pdoConn->prepare($mSql);
+    $stmt->execute();
+    
+	$mSql="SELECT *   FROM tblfilemaster where filename='$pageUrl'";
+    $stmt=$pdoConn->prepare($mSql);
+    $stmt->execute();
+	$rowy = $stmt->fetch();
 	$fid=$rowy['fileid'];
-	}
-	
-	mysql_query("insert into yogis.tblfileaccessrights(uid,fid,access)values('1','$fid','Yes')");
+
+	$mSql="insert into tblfileaccessrights(uid,fid,access)values('1','$fid','Yes');
+    insert into tblfileaccessrights(uid,fid,access)values('3','$fid','Yes');
+    insert into tblfileaccessrights(uid,fid,access)values('4','$fid','Yes');
+    insert into tblfileaccessrights(uid,fid,access)values('5','$fid','Yes');
+    insert into tblfileaccessrights(uid,fid,access)values('78','$fid','Yes');
+    insert into tblfileaccessrights(uid,fid,access)values('158','$fid','Yes');
+    ";
+    $stmt=$pdoConn->prepare($mSql);
+    $stmt->execute();
+    
+    
 	}
 	$muid=$_SESSION["member"]->getValue("id");
 	$info = pathinfo($pageUrl);
 	$msid=$_SESSION["mysessionid"];
 	if ($info["extension"] == "php") {
-		mysql_query("insert into yogis.tblphpaccesslog(uid,pagename,mdate,sessionid)values('$muid','$pageUrl',now(),'$msid')");
+		$mSql="insert into tblphpaccesslog(uid,pagename,mdate,sessionid)values('$muid','$pageUrl',now(),'$msid') on duplicate key update id=id";
+         $stmt=$pdoConn->prepare($mSql);
+         $stmt->execute();
+        
+        
+        
 		}
 	
 	
