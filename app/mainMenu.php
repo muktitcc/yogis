@@ -1,19 +1,22 @@
 <?php
 require_once("userAuthentication.php");
-require_once("mainMenu_fn.php");
+require_once("mhvMenu_fn.php");
 $fn=new common_Functions();
 $mb=new Mobile_Detect;
-$fn_this=new mainMenu(new common_Functions($fn));
+$fn_this=new mhvMenu(new common_Functions($fn));
+
+$pdoConn=$fn->_myConn();
 
 if($mb->isMobile())
-header("Location:mainMenu_m.php");
+header("Location:mhvMenu_m.php");
 
 $uid=UID;
 $update='<span class="label label-success">Update</span>';
 $new='<span class="label label-important">New</span>';
+$menuPullLeft=array(9,12,13);
 displayPageHeader( "Error" );
 ?>
-<link href="asset/css/mainMenu.css" rel="stylesheet">
+<link href="asset/css/mhvMenu.css" rel="stylesheet">
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 <div class="navbar-inner">
@@ -48,25 +51,27 @@ $hassubmenu= $srow["hassubmenu"];
 $secondlevel=1;
 $thirdlevel=1;
 if($hassubmenu=='No'){ 
-$tmsql="SELECT *  FROM yogis.tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
-$tr=mysql_query($tmsql);
-while ($trow = mysql_fetch_array($tr)) {
+$tmsql="SELECT *  FROM tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
+$stmt=$pdoConn->prepare($tmsql);
+$stmt->execute();
+while ($trow = $stmt->fetch()) {
 $fid=$trow["fileid"];
 $filename=$trow["filename"];
 $note=$trow["note"];
 $entrytype=$trow["entrytype"];
 }
 
-$cmsql="SELECT count(*) cnt  FROM yogis.tblfileaccessrights  where fid= '$fid' and  uid='$uid'";
-$cr=mysql_query($cmsql);
-while ($crow = mysql_fetch_array($cr)) {
+$cmsql="SELECT count(*) cnt  FROM tblfileaccessrights  where fid= '$fid' and  uid='$uid'";
+$stmt_c=$pdoConn->prepare($cmsql);
+$stmt_c->execute();
+while ($crow = $stmt_c->fetch()) {
 $canaccess=$crow["cnt"];
 }
 ?>
 
 
 <?php 
-if($filename=='mainMenu.php' or $filename=='logout.php'){ 
+if($filename=='mhvMenu.php' or $filename=='logout.php'){ 
 ?>
 <li><a class="right" title="" data-placement="right" data-toggle="tooltip" data-original-title='<?php echo $note  ?>' href=<?php echo $filename ?> > <?php echo $secondmenuname  ?></a></li>
 
@@ -97,17 +102,19 @@ if($canaccess==1){
 <?php
 }else{
 
-$tmsql="SELECT *  FROM yogis.tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
-$tr=mysql_query($tmsql);
-while ($trow = mysql_fetch_array($tr)) {
+$tmsql="SELECT *  FROM tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
+$stmt=$pdoConn->prepare($tmsql);
+$stmt->execute();
+while ($trow = $stmt->fetch()) {
 $fid=$trow["fileid"];
 $filename=$trow["filename"];
 $displayname=$trow["displayname"];
 $note=$trow["note"];
 $entrytype=$trow["entrytype"];
-$cmsql="SELECT count(*) cnt  FROM yogis.tblfileaccessrights  where  uid='$uid' and fid in(select fileid from tblfilemaster where secondmenuid='$secondmenuid' and status='Active' )";
-$cr=mysql_query($cmsql);
-while ($crow = mysql_fetch_array($cr)) {
+$cmsql="SELECT count(*) cnt  FROM tblfileaccessrights  where  uid='$uid' and fid in(select fileid from tblfilemaster where secondmenuid='$secondmenuid' and status='Active' )";
+$stmt_c=$pdoConn->prepare($cmsql);
+$stmt_c->execute();
+while ($crow = $stmt_c->fetch()) {
 $canaccess=$crow["cnt"];
 }
 }
@@ -136,9 +143,10 @@ if(in_array($topmenuid,$menuPullLeft)){
 }
 ?>
 <?php
-$tmsql="SELECT *  FROM yogis.tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
-$tr=mysql_query($tmsql);
-while ($trow = mysql_fetch_array($tr)) {
+$tmsql="SELECT *  FROM tblfilemaster  where mainmenu= '$topmenuid' and  secondmenuid='$secondmenuid' and status='Active' order by mainmenu,secondmenuid,displayorder";
+$stmt=$pdoConn->prepare($tmsql);
+$stmt->execute();
+while ($trow = $stmt->fetch()) {
 $fid=$trow["fileid"];
 $tooltipposition=$trow["tooltipposition"];
 $filename=$trow["filename"];
@@ -147,8 +155,9 @@ $note=$trow["note"];
 $entrytype=$trow["entrytype"];
 $popup=$trow["needpopup"];
 $cmsql="SELECT count(*) cnt  FROM tblfileaccessrights  where fid= '$fid' and  uid='$uid'";
-$cr=mysql_query($cmsql);
-while ($crow = mysql_fetch_array($cr)) {
+$stmt_c=$pdoConn->prepare($cmsql);
+$stmt_c->execute();
+while ($crow = $stmt_c->fetch()) {
 $canaccess=$crow["cnt"];
 }
 ?>
@@ -177,12 +186,12 @@ if($popup=='No')
 switch ($fid) {
 case ($fid=='55') :
 ?>
-<li><a class="right" title="" data-placement='<?php echo $tooltipposition ?>' data-toggle="tooltip" data-original-title='<?php echo $note  ?>' href="javascript:window.open( '<?php echo $filename ?>' ,'newwind','width=900,height=650')"><?php echo $displayname  ?>&nbsp;&nbsp;<?php if($entrytype=='New'){echo $new;} if($entrytype=='Update'){echo $update;}   ?></a></li>
+<li><a class="right" title="" data-placement='<?php echo $tooltipposition ?>' data-toggle="tooltip" data-original-title='<?php echo $note  ?>' href="javascript:window.open( '<?php echo $filename ?>' ,'newwind','width=1050,height=900')"><?php echo $displayname  ?>&nbsp;&nbsp;<?php if($entrytype=='New'){echo $new;} if($entrytype=='Update'){echo $update;}   ?></a></li>
 <?php
 break;
 case ($fid=='64') :
 ?>
-<li><a class="right" title="" data-placement='<?php echo $tooltipposition ?>' data-toggle="tooltip" data-original-title='<?php echo $note  ?>' href="javascript:window.open( '<?php echo $filename ?>' ,'newwind','width=900,height=650')"><?php echo $displayname  ?>&nbsp;&nbsp;<?php if($entrytype=='New'){echo $new;} if($entrytype=='Update'){echo $update;}   ?></a></li>
+<li><a class="right" title="" data-placement='<?php echo $tooltipposition ?>' data-toggle="tooltip" data-original-title='<?php echo $note  ?>' href="javascript:window.open( '<?php echo $filename ?>' ,'newwind','width=1050,height=900')"><?php echo $displayname  ?>&nbsp;&nbsp;<?php if($entrytype=='New'){echo $new;} if($entrytype=='Update'){echo $update;}   ?></a></li>
 <?php
 break;
 default:
@@ -229,7 +238,7 @@ default:
 
 <?php
 $e=$_GET["file"];
-if (strtolower($e)=="mainMenu.php"){
+if (strtolower($e)=="mhvmenu.php"){
 
 }else{
 ?>
@@ -248,10 +257,16 @@ if (strtolower($e)=="mainMenu.php"){
 
 <?php
 
+require_once("internal_mysqlReplicationInfo.php");
+require_once("mhithelpdesk.php");
 ?>	
 
 <script src="../vendor/bootstrap/js/jquery.js"></script>
 <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="asset/js/mainMenu.js" type="text/javascript"></script>
+<script src="asset/js/mhithelpdesk.js"></script>
+<link href="asset/css/mhithelpdesk.css" rel="stylesheet">
+<script src="asset/js/internal_mysqlReplicationInfo.js"></script>
+<link href="asset/css/internal_mysqlReplicationInfo.css" rel="stylesheet">
+<script src="asset/js/mhvMenu.js" type="text/javascript"></script>
 
 
