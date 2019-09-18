@@ -630,7 +630,7 @@ $needThumb="";
 if($data['newfileThumb']){
   
 $needThumb=$this->fn->_getThumbnailImage(realpath($data['imagelocation']),APPDATA_DIR.$data['newfileThumb']);
-phpgrid_error($needThumb);  
+//phpgrid_error($needThumb);  
 }else{
 $needThumb="ok";	
 }
