@@ -628,7 +628,7 @@ unlink( realpath(APPDATA_DIR.$data['newFile']));
 
 $needThumb="";
 if($data['newfileThumb']){
-phpgrid_error("mm".realpath($data['imagelocation']));    
+phpgrid_error(APPDATA_DIR.$data['newfileThumb']);    
 $needThumb=$this->fn->_getThumbnailImage(realpath($data['imagelocation']),APPDATA_DIR.$data['newfileThumb']);
 phpgrid_error("mmmff");
 }else{
