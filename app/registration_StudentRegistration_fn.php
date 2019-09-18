@@ -628,12 +628,13 @@ unlink( realpath(APPDATA_DIR.$data['newFile']));
 
 $needThumb="";
 if($data['newfileThumb']){
+    phpgrid_error("mmm");
 $needThumb=$this->fn->_getThumbnailImage(realpath($data['imagelocation']),APPDATA_DIR.$data['newfileThumb']);
 }else{
 $needThumb="ok";	
 }
 
-phpgrid_error("mmm");
+
 
 if (!copy(realpath($data['imagelocation']), APPDATA_DIR.$data['newFile']) or $needThumb!='ok'){	
 phpgrid_error("File type should be jpg");
