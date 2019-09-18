@@ -88,6 +88,10 @@ break;
 if ($source_gd_image === false) {
 return false;
 }
+
+return "mmmm";
+
+
 $source_aspect_ratio = $source_image_width / $source_image_height;
 $thumbnail_aspect_ratio = THUMBNAIL_IMAGE_MAX_WIDTH / THUMBNAIL_IMAGE_MAX_HEIGHT;
 if ($source_image_width <= THUMBNAIL_IMAGE_MAX_WIDTH && $source_image_height <= THUMBNAIL_IMAGE_MAX_HEIGHT) {
@@ -108,7 +112,7 @@ $backcolor = imagecolorallocate($img_disp,0,0,0);
 imagefill($img_disp,0,0,$backcolor);
 
 imagecopy($img_disp, $thumbnail_gd_image, (imagesx($img_disp)/2)-(imagesx($thumbnail_gd_image)/2), (imagesy($img_disp)/2)-(imagesy($thumbnail_gd_image)/2), 0, 0, imagesx($thumbnail_gd_image), imagesy($thumbnail_gd_image));
-return "mmmm";
+
 imagejpeg($img_disp, $thumbnail_image_path, 90);
 imagedestroy($source_gd_image);
 imagedestroy($thumbnail_gd_image);
