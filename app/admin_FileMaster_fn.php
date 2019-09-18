@@ -7,18 +7,28 @@ $this->g=$g;
 }
 	
 function after_update($data){ 
+$pdoConn=parent::connect(); 
 $msql="SELECT *  FROM yogis.tblfilemaster where fileid={$data["fileid"]}";
-$r=mysql_query($msql);
-while ($rowy = mysql_fetch_array($r)) {
+$stmt=$pdoConn->prepare($msql);
+$stmt->execute();
+while ($rowy = $stmt->fetch()) {
 $filename=$rowy['filename'];
 } 
-mysql_query("delete from yogis.tblaccesslog where pageUrl='$filename'");
+$msql="delete from yogis.tblaccesslog where pageUrl='$filename'";
+$stmt=$pdoConn->prepare($msql);
+$stmt->execute();
+
 }
 
 function show_link($data){
+
+$pdoConn=parent::connect();    
+    
 $id = $data["fileid"];
-$result = mysql_query("select * from yogis.tblfilemaster WHERE fileid = '$id'") or die(mysql_error()); 
-while($row = mysql_fetch_array( $result )) {
+$mSql = "select * from yogis.tblfilemaster WHERE fileid = '$id'"; 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->execute();
+while($row = $stmt->fetch()) {
 $displayname = $row['displayname'];
 $filename = $row['filename'];
 $isinternal=$row['isinternal'];
