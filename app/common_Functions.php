@@ -94,7 +94,7 @@ return false;
 }
 
 
-
+return "msize: ".$source_gd_image;
 
 $source_aspect_ratio = $source_image_width / $source_image_height;
 $thumbnail_aspect_ratio = THUMBNAIL_IMAGE_MAX_WIDTH / THUMBNAIL_IMAGE_MAX_HEIGHT;
