@@ -612,7 +612,7 @@ $_SESSION["WEBCAMFILE"]="";
 function processStudentAttachmentOnInsert($data){
 $pdoConn=parent::connect();
 
-
+phpgrid_error(print_r($data));
 if($data['imagelocation']){
 $ext = pathinfo(realpath($data['imagelocation']), PATHINFO_EXTENSION); 
 if($ext <> $data['requiredfiletype']) 
