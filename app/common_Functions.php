@@ -108,7 +108,7 @@ $backcolor = imagecolorallocate($img_disp,0,0,0);
 imagefill($img_disp,0,0,$backcolor);
 
 imagecopy($img_disp, $thumbnail_gd_image, (imagesx($img_disp)/2)-(imagesx($thumbnail_gd_image)/2), (imagesy($img_disp)/2)-(imagesy($thumbnail_gd_image)/2), 0, 0, imagesx($thumbnail_gd_image), imagesy($thumbnail_gd_image));
-
+return "mmmm";
 imagejpeg($img_disp, $thumbnail_image_path, 90);
 imagedestroy($source_gd_image);
 imagedestroy($thumbnail_gd_image);
