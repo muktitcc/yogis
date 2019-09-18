@@ -612,7 +612,7 @@ $_SESSION["WEBCAMFILE"]="";
 function processStudentAttachmentOnInsert($data){
 $pdoConn=parent::connect();
 
-phpgrid_error(print_r($data));
+//phpgrid_error(print_r($data));
 if($data['imagelocation']){
 $ext = pathinfo(realpath($data['imagelocation']), PATHINFO_EXTENSION); 
 if($ext <> $data['requiredfiletype']) 
@@ -644,7 +644,7 @@ $stmt->bindParam(":2",$ext);
 $stmt->bindParam(":3",$data['studentcode']);
 $stmt->execute();
 }catch(PDOException $e){
-//phpgrid_error($e->getMessage());
+phpgrid_error($e->getMessage());
 }	
 header("Cache-Control: no-cache, must-revalidate"); 
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); 
