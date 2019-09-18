@@ -617,7 +617,7 @@ if($data['imagelocation']){
 $ext = pathinfo(realpath($data['imagelocation']), PATHINFO_EXTENSION); 
 if($ext <> $data['requiredfiletype']) 
 {
-//phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
+phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
 unlink(realpath($data['imagelocation'])); 
 } 
 if(file_exists(APPDATA_DIR.$data['newFile']))
