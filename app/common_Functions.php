@@ -83,6 +83,7 @@ case IMAGETYPE_GIF:
 $source_gd_image = imagecreatefromgif($source_image_path);
 break;
 case IMAGETYPE_JPEG:
+return "msize: ".$source_image_path;
 $source_gd_image = imagecreatefromjpeg($source_image_path);
 break;
 case IMAGETYPE_PNG:
@@ -90,7 +91,7 @@ $source_gd_image = imagecreatefrompng($source_image_path);
 break;
 }
 
-return "msize: ".$source_gd_image;
+
 if ($source_gd_image === false) {
 return false;
 }
