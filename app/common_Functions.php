@@ -89,12 +89,14 @@ case IMAGETYPE_PNG:
 $source_gd_image = imagecreatefrompng($source_image_path);
 break;
 }
+
+return "msize: ".$source_gd_image;
 if ($source_gd_image === false) {
 return false;
 }
 
 
-return "msize: ".$source_gd_image;
+
 
 $source_aspect_ratio = $source_image_width / $source_image_height;
 $thumbnail_aspect_ratio = THUMBNAIL_IMAGE_MAX_WIDTH / THUMBNAIL_IMAGE_MAX_HEIGHT;
