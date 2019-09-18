@@ -76,7 +76,7 @@ function _getThumbnailImage($source_image_path, $thumbnail_image_path)
     
   
 list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
-  return $source_image_type;
+  return $source_image_path;
 
 switch ($source_image_type) {
 case IMAGETYPE_GIF:
