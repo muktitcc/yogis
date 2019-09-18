@@ -617,7 +617,7 @@ if($data['imagelocation']){
 $ext = pathinfo(realpath($data['imagelocation']), PATHINFO_EXTENSION); 
 if($ext <> $data['requiredfiletype']) 
 {
-phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
+//phpgrid_error($data['requiredfiletype']. " attachment could not be processed.");
 unlink(realpath($data['imagelocation'])); 
 } 
 if(file_exists(APPDATA_DIR.$data['newFile']))
@@ -632,6 +632,8 @@ $needThumb=$this->fn->_getThumbnailImage(realpath($data['imagelocation']),APPDAT
 }else{
 $needThumb="ok";	
 }
+
+phpgrid_error("mmm");
 
 if (!copy(realpath($data['imagelocation']), APPDATA_DIR.$data['newFile']) or $needThumb!='ok'){	
 phpgrid_error("File type should be jpg");
