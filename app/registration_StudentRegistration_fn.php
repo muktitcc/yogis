@@ -454,7 +454,7 @@ $dancecategory=$data["params"]["dancecategory"];
 
 $stdfileuplocation=empty($_SESSION["WEBCAMFILE"])?$data["params"]["studentimagelocation"]:$_SESSION["WEBCAMFILE"];
 
-$medfileuplocation=$data["params"]["birthcertdoclocation"];
+$medfileuplocation=empty($data["params"]["birthcertdoclocation"])?"NA":$data["params"]["birthcertdoclocation"];
 $updatedby=$this->fn->_getApplicationUserName(UID);
 
 
