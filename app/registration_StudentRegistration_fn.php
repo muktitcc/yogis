@@ -268,7 +268,7 @@ $cols[] = $col;
 $col = array(); 
 $col["title"] = "Dance Category"; 
 $col["name"] = "dancecategory"; 
-$col["width"] = "205"; 
+$col["width"] = "150"; 
 $col["align"] = "left"; 
 $col["search"] = true; 
 $col["editable"] = true; 
@@ -345,8 +345,15 @@ $col["editoptions"] = array("value"=> $str);
 $col["formatter"] = "select"; 
 $col["stype"] = "select"; 
 $col["searchoptions"] = array("value" => ':;'.$str); 
-$col["show"] = array("list"=>false, "add"=>false, "edit"=>true, "view"=>false);
+$col["show"] = array("list"=>true, "add"=>false, "edit"=>true, "view"=>false);
 $cols[] = $col;	
+
+$f = array(); 
+$f["column"] = "status"; 
+$f["op"] = "="; 
+$f["value"] = "Inactive"; 
+$f["cellcss"] = "'background-color':'#FA5858'"; 
+$f_conditions[] = $f;
 
 $grid["form"]["position"] = "";
 $grid["rowList"] = array();
@@ -428,7 +435,7 @@ $g->set_events($e);
 
 
 $g->set_conditional_css($f_conditions); 
-$g->select_command = "select * from yogis.tblstudentregistration where status='Active'";
+$g->select_command = "select * from yogis.tblstudentregistration";
 $g->table = "yogis.tbltopmenu";
 $g->set_options($grid);
 $g->set_columns($cols);
@@ -535,6 +542,9 @@ $package=$data["params"]["package"];
 $regdatefrom=$data["params"]["regdatefrom"];
 $regdateto=$data["params"]["regdateto"];
 $dancecategory=$data["params"]["dancecategory"];
+$status=$data["params"]["status"];
+
+
 //$stdfileuplocation=$data["params"]["studentimagelocation"];
 $stdfileuplocation=empty($_SESSION["WEBCAMFILE"])?$data["params"]["studentimagelocation"]:$_SESSION["WEBCAMFILE"];
 $medfileuplocation=$data["params"]["birthcertdoclocation"];
@@ -544,7 +554,7 @@ $updatedby=$this->fn->_getApplicationUserName(UID);
 
 
 $pdoConn->beginTransaction();
-$mSql="update yogis.tblstudentregistration set studentname=:studentname,dateofbirth=:dateofbirth,medicalcondition=:medicalcondition,mothername=:mothername,fathername=:fathername,address=:address,phone=:phone,phoneemergency=:phoneemergency,package=:package,regdatefrom=:regdatefrom,regdateto=:regdateto,updatedby=:updatedby,updatedon=now(),dancecategory=:dancecategory where studentcode=:studentcode";
+$mSql="update yogis.tblstudentregistration set studentname=:studentname,dateofbirth=:dateofbirth,medicalcondition=:medicalcondition,mothername=:mothername,fathername=:fathername,address=:address,phone=:phone,phoneemergency=:phoneemergency,package=:package,regdatefrom=:regdatefrom,regdateto=:regdateto,updatedby=:updatedby,updatedon=now(),dancecategory=:dancecategory,status=:status where studentcode=:studentcode";
 	
 try{
 
@@ -564,6 +574,7 @@ $stmt->bindParam(":regdatefrom",$regdatefrom);
 $stmt->bindParam(":regdateto",$regdateto);
 $stmt->bindParam(":updatedby",$updatedby);
 $stmt->bindParam(":dancecategory",$dancecategory);
+$stmt->bindParam(":status",$status);
 $stmt->execute();
 $pdoConn->commit();	
 
