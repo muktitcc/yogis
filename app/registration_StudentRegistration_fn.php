@@ -833,8 +833,8 @@ $email=implode(",",$FEEALERTEMAIL);
 $to      = $email;
 $subject="Test";
 $message="This is a test message.";
-$headers = 'From: webmaster@example.com' . "\r\n" .
-    'Reply-To: webmaster@example.com' . "\r\n" .
+$headers = 'From: noreply@yogis.com' . "\r\n" .
+    'Reply-To: noreply@yogis.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 
 mail($to, $subject, $message, $headers);
