@@ -17,5 +17,5 @@ define("PHP_JQGRID_CLASS_PATH_OLD", "../vendor/inc");
 define("PHP_JQGRID_CLASS_PATH_NEW", "../vendor/inc-new");
 define("TEMP_DIR", "../appData/temp");
 define("APPDATA_DIR", "../appData/");
-$GLOBALS['FEEALERTEMAIL']=array("muktitcc@gmail.com");
+$GLOBALS['FEEALERTEMAIL']=array("muktitcc@gmail.com","dilugiri@gmail.com");
 ?>
