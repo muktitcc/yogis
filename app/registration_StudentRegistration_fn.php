@@ -827,8 +827,7 @@ global $FEEALERTEMAIL;
 $to=implode(",",$FEEALERTEMAIL);
 
 $mSql="select * from yogis.tblfeetransaction where 
-CURDATE() between DATE(DATE_SUB(DATE(notificationdate), INTERVAL 7 DAY)) and notificationdate and isnotified='No'
-";
+CURDATE() between DATE(DATE_SUB(DATE(notificationdate), INTERVAL 7 DAY)) and notificationdate and isnotified='No' and status='Active'";
 
 $stmt=$pdoConn->prepare($mSql);
 $stmt->execute();
