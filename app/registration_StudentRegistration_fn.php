@@ -820,6 +820,18 @@ return 	$tableotherdetail;
 }
 
 
+function alertFeePayment(){
+$pdoConn=parent::connect();
+
+global $FEEALERTEMAIL;    
+
+$email=implode(",",$FEEALERTEMAIL);
+$subject="Test";
+$message="This is a test message.";
+$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
+    
+}
+
 
 }
 ?>
