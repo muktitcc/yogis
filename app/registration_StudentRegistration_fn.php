@@ -827,7 +827,7 @@ global $FEEALERTEMAIL;
 
 $email=implode(",",$FEEALERTEMAIL);
 
-$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
+$this->fn->_sendEmail("noreply@yogis.com","Admin","muktitcc@gmail.com",$subject,$message);
  
 
 
