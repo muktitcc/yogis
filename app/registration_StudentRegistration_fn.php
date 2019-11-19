@@ -830,7 +830,7 @@ $email=implode(",",$FEEALERTEMAIL);
 //$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
  
 
-$to      = $email;
+$to      = "muktitcc@gmail.com";
 $subject="Test";
 $message="This is a test message.";
 $headers = 'From: noreply@yogis.com' . "\r\n" .
