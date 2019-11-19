@@ -1,7 +1,7 @@
 <?php
 require_once("userAuthentication.php");
-//require_once($_SESSION["thisFile"]."_fn.php");
-//require_once($_SESSION["thisFile"]."_php.php");
+require_once($_SESSION["thisFile"]."_fn.php");
+require_once($_SESSION["thisFile"]."_php.php");
 displayPageHeader("Trnsaction");
 ?>
 
