@@ -1,5 +1,8 @@
 <?php
-require_once("userAuthentication.php");
+
+echo "asdasd";
+exit;
+//require_once("userAuthentication.php");
 //require_once($_SESSION["thisFile"]."_fn.php");
 //require_once($_SESSION["thisFile"]."_php.php");
 displayPageHeader("Trnsaction");
