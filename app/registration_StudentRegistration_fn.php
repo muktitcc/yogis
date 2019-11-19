@@ -826,10 +826,20 @@ $pdoConn=parent::connect();
 global $FEEALERTEMAIL;    
 
 $email=implode(",",$FEEALERTEMAIL);
+
+//$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
+ 
+
+$to      = $email;
 $subject="Test";
 $message="This is a test message.";
-$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
-    
+$headers = 'From: webmaster@example.com' . "\r\n" .
+    'Reply-To: webmaster@example.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+
+ 
 }
 
 
