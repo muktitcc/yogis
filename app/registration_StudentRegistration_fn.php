@@ -823,20 +823,66 @@ return 	$tableotherdetail;
 function alertFeePayment(){
 $pdoConn=parent::connect();
 
-global $FEEALERTEMAIL;    
+global $FEEALERTEMAIL;
+$to=implode(",",$FEEALERTEMAIL);
 
-$email=implode(",",$FEEALERTEMAIL);
-$subject="Test";
-$message="This is a test.";
-$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
- 
+$mSql="select * from yogis.tblfeetransaction where 
+CURDATE() between DATE(DATE_SUB(DATE(notificationdate), INTERVAL 7 DAY)) and notificationdate and isnotified='No'
+";
 
+$stmt=$pdoConn->prepare($mSql);
+$stmt->execute();
+while($row=$stmt->fetch()){
+$id=$row['id'];
+$studentid=$row['studentid'];
+$duedate=$row['notificationdate'];   
+$studentname=$studentid.' '.$this->getMasterData($studentid,"studentname");    
+    
+$subject="Fee Payment Due Date ". $studentname;
+$message='Dear Sir/Madam,'.'<br> This is to alert that the fee payment due  date for the student <b>'.$studentname.'</b> is on date <b>'.$duedate.'</b><br><br>For Yogis Dance Studio';
+if(!$this->fn->_sendEmail("noreply@yogis.com","Yogis - Admin",$to,$subject,$message)){
+echo "Error: " . $mail->ErrorInfo;
+}else{
+    
+$mSql_update="update  yogis.tblfeetransaction  set isnotified='Yes' where id=:id";
+$stmt_update=$pdoConn->prepare($mSql_update);
+$stmt_update->bindParam(":id",$id);
+$stmt_update->execute();    
 
+}    
+    
+}
 
- 
+echo "Complete";
 }
 
 
+
+function getMasterData($studentcode,$field){
+
+$pdoConn=parent::connect();    
+    
+$mSql="select ".$field." from yogis.tblstudentregistration where studentcode=:studentcode";
+try{
+$stmt=$pdoConn->prepare($mSql); 
+$stmt->bindParam(":studentcode",$studentcode);
+$stmt->execute();
+    //phpgrid_error("fff");
+if($stmt->rowCount()>0){
+$row=$stmt->fetch();
+return $row[$field];
+
+    
+}else{
+return "";   
+}
+}catch(PDOException $e){
+phpgrid_error($e->getMessage());    
+    
+}
+
+ 
+}
 }
 ?>
 
