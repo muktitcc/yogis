@@ -290,7 +290,7 @@ $g->set_events($e);
 
 $g->set_conditional_css($f_conditions); 
 $g->select_command = "select *,month(trndate) mmonth,year(trndate) myear, isnotified isfullpayment from yogis.tbltransaction where status='Active'";
-$g->table = "yogis.tbltopmenu";
+$g->table = "yogis.tbltransaction";
 $g->set_options($grid);
 $g->set_columns($cols);
 return $g->render("listTransaction");	
