@@ -839,7 +839,7 @@ $duedate=$row['notificationdate'];
 $studentname=$studentid.' '.$this->getMasterData($studentid,"studentname");    
     
 $subject="Fee Payment Due Date ". $studentname;
-$message='Dear Sir/Madam,'.'<br> This is to alert that the fee payment due  date for the student <b>'.$studentname.'</b> is on date <b>'.$duedate.'</b><br><br>For Yogis Dance Studio';
+$message='Dear Sir/Madam,'.'<br> This is to alert that the fee payment due  date for the student <b>'.$studentname.'</b> is on date <b>'.$duedate.'</b><br><br><b><i><font color="red">This is an auto generated email, please do not reply.</font></i></b><br><br>For Yogis Dance Studio';
 if(!$this->fn->_sendEmail("noreply@yogis.com","Yogis - Admin",$to,$subject,$message)){
 echo "Error: " . $mail->ErrorInfo;
 }else{
