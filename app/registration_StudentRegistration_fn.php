@@ -826,8 +826,9 @@ $pdoConn=parent::connect();
 global $FEEALERTEMAIL;    
 
 $email=implode(",",$FEEALERTEMAIL);
-
-$this->fn->_sendEmail("noreply@yogis.com","Admin","muktitcc@gmail.com",$subject,$message);
+$subject="Test";
+$message="This is a test.";
+$this->fn->_sendEmail("noreply@yogis.com","Admin",$email,$subject,$message);
  
 
 
