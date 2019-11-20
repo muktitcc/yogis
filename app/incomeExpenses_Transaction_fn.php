@@ -301,11 +301,12 @@ function on_deleteTransaction($data){
 $pdoConn=parent::connect();
 
 $id=$data['id'];
+$updatedby=$this->fn->_getApplicationUserName(UID);
 
-
-$mSql="update yogis.tbltransaction set status='Inactive' where id=:id";
+$mSql="update yogis.tbltransaction set status='Inactive',updatedby=:updatedby,updateddate=now() where id=:id";
 $stmt=$pdoConn->prepare($mSql);
 $stmt->bindParam(":id",$id);
+$stmt->bindParam(":updatedby",$updatedby);
 $stmt->execute();
 
 $mSql="update yogis.tblfeetransaction set status='Inactive' where trnid=:trnid";
