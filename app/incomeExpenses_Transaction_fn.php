@@ -450,7 +450,7 @@ phpgrid_error($e->getMessage());
 }
 
 
-$mSql="update yogis.tblfeetransaction set isnotified='Na' where studentid=:studentid and notificationdate<:notificationdate";
+$mSql="update yogis.tblfeetransaction set isnotified='Na' where studentid=:studentid and notificationdate<:notificationdate and isnotified='Yes'";
 try{
 $stmt=$pdoConn->prepare($mSql);	
 $stmt->bindParam(":studentid",$ledger);
