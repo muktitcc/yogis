@@ -449,6 +449,21 @@ phpgrid_error($e->getMessage());
 	
 }
 
+
+$mSql="update yogis.tblfeetransaction set isnotified='Na' where studentid=:studentid and notificationdate<:notificationdate";
+try{
+$stmt=$pdoConn->prepare($mSql);	
+$stmt->bindParam(":studentid",$ledger);
+$stmt->bindParam(":notificationdate",$notificationdate);
+$stmt->execute();	
+}catch(PDOException $e){
+$pdoConn->rollBack();
+phpgrid_error($e->getMessage());	
+	
+}
+
+
+
 }
 
 
