@@ -435,7 +435,7 @@ $g->set_events($e);
 
 
 $g->set_conditional_css($f_conditions); 
-$g->select_command = "select * from yogis.tblstudentregistration";
+$g->select_command = "select * from yogis.tblstudentregistration where status='Active'";
 $g->table = "yogis.tbltopmenu";
 $g->set_options($grid);
 $g->set_columns($cols);
